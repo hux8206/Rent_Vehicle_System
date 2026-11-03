@@ -1,0 +1,23 @@
+{
+  "name": "vehicle-rent-system",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Multi-vendor Vehicle Rental Platform Monorepo",
+  "workspaces": [
+    "apps/*"
+  ],
+  "scripts": {
+    "dev:api": "npm run start:dev --workspace=api",
+    "dev:web": "npm run dev --workspace=web",
+    "build": "npm run build --workspaces",
+    "db:generate": "npm run prisma:generate --workspace=api",
+    "db:migrate": "npm run prisma:migrate --workspace=api",
+    "db:push": "npm run prisma:push --workspace=api",
+    "db:seed": "npm run prisma:seed --workspace=api",
+    "db:studio": "npm run prisma:studio --workspace=api"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
+
