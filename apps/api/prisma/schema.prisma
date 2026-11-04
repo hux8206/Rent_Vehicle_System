@@ -15,9 +15,11 @@ model User {
   phone          String   @db.VarChar(20)
   role           Int      @default(2) // 0: Admin, 1: Partner, 2: Customer
   status         Boolean  @default(true)
-  driverLicense  String?  @db.VarChar(50)
-  bankAccountNum String?  @db.VarChar(50)
-  bankName       String?  @db.VarChar(100)
+  driverLicense      String?  @db.VarChar(50)
+  driverLicenseFront String?  @db.VarChar(500)
+  driverLicenseBack  String?  @db.VarChar(500)
+  bankAccountNum     String?  @db.VarChar(50)
+  bankName           String?  @db.VarChar(100)
   createdAt      DateTime @default(now())
 
   stores         Store[]
@@ -30,13 +32,15 @@ model User {
 }
 
 model Store {
-  id           Int      @id @default(autoincrement())
+  id           Int     @id @default(autoincrement())
   partnerId    Int
-  storeName    String   @db.VarChar(255)
-  address      String   @db.VarChar(500)
-  phoneContact String   @db.VarChar(20)
-  description  String?  @db.Text
-  status       String   @default("ACTIVE") @db.VarChar(50)
+  storeName    String  @db.VarChar(255)
+  address      String  @db.VarChar(500)
+  phoneContact String  @db.VarChar(20)
+  description  String? @db.Text
+  storeImage   String? @db.VarChar(500)
+  status       Int     @default(0) // 0: PENDING, 1: ACTIVE, 2: REJECTED
+  rejectReason String? @db.VarChar(500)
 
   partner       User           @relation(fields: [partnerId], references: [id])
   rentalPolicy  RentalPolicy?

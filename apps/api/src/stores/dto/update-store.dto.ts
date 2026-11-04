@@ -21,4 +21,10 @@ export class UpdateStoreDto {
   @IsOptional()
   @IsString()
   description?: string;
+
+  @ApiPropertyOptional({ example: 'https://storage.example.com/stores/xyz_cover.jpg' })
+  @IsOptional()
+  @IsString()
+  storeImage?: string;
 }
+

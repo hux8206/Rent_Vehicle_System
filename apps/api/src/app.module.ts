@@ -4,6 +4,7 @@ import { PrismaModule } from './prisma/prisma.module';
 import { AuthModule } from './auth/auth.module';
 import { StoresModule } from './stores/stores.module';
 import { VehiclesModule } from './vehicles/vehicles.module';
+import { BookingsModule } from './modules/bookings/bookings.module';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 
@@ -17,6 +18,7 @@ import { AppService } from './app.service';
     AuthModule,
     StoresModule,
     VehiclesModule,
+    BookingsModule,
   ],
   controllers: [AppController],
   providers: [AppService],

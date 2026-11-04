@@ -137,7 +137,7 @@ export class VehiclesService {
     const skip = (page - 1) * limit;
 
     const where: Prisma.VehicleModelWhereInput = {
-      store: { status: 'ACTIVE' },
+      store: { status: 1 }, // 1 = ACTIVE
       ...(type !== undefined && { type }),
       ...(brand && { brand: { contains: brand } }),
       ...(storeId && { storeId }),
