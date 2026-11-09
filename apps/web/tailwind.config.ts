@@ -56,6 +56,12 @@ const config: Config = {
         md: "calc(var(--radius) - 2px)",
         sm: "calc(var(--radius) - 4px)",
       },
+      boxShadow: {
+        "cyan-glow": "0 8px 25px -4px rgba(6, 182, 212, 0.4)",
+        "amber-glow": "0 8px 20px -4px rgba(245, 158, 11, 0.35)",
+        "orange-glow": "0 8px 20px -4px rgba(249, 115, 22, 0.35)",
+        "card-hover": "0 12px 30px -10px rgba(15, 23, 42, 0.12), 0 4px 12px rgba(6, 182, 212, 0.08)",
+      },
     },
   },
   plugins: [],

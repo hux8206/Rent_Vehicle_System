@@ -10,6 +10,11 @@ export class CreateStoreDto {
   @IsNotEmpty()
   storeName: string;
 
+  @ApiPropertyOptional({ example: 'Đà Nẵng', description: 'Tỉnh / Thành phố của cửa hàng' })
+  @IsOptional()
+  @IsString()
+  province?: string;
+
   @ApiProperty({ example: '123 Nguyễn Văn Linh, Đà Nẵng' })
   @IsString()
   @IsNotEmpty()
@@ -32,6 +37,16 @@ export class CreateStoreDto {
   @IsOptional()
   @IsString()
   storeImage?: string;
+
+  @ApiPropertyOptional({ example: '07:00', description: 'Giờ mở cửa (HH:mm)' })
+  @IsOptional()
+  @IsString()
+  openTime?: string;
+
+  @ApiPropertyOptional({ example: '21:00', description: 'Giờ đóng cửa (HH:mm)' })
+  @IsOptional()
+  @IsString()
+  closeTime?: string;
 
   // ── Chính sách thuê (tạo RentalPolicy đồng thời) ─────────────────────────
 

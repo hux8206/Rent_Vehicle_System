@@ -27,11 +27,6 @@ export class RegisterDto {
   @Max(2)
   role: number;
 
-  @ApiPropertyOptional({ example: 'B2-123456' })
-  @IsOptional()
-  @IsString()
-  driverLicense?: string;
-
   @ApiPropertyOptional({ example: '123456789' })
   @IsOptional()
   @IsString()

@@ -2,8 +2,11 @@ import {
   Body,
   Controller,
   Get,
+  HttpCode,
+  HttpStatus,
   Param,
   ParseIntPipe,
+  Patch,
   Post,
   Query,
   RawBodyRequest,
@@ -19,6 +22,7 @@ import {
 } from '@nestjs/swagger';
 import { PaymentsService } from './payments.service';
 import { DepositWalletDto, PayosWebhookDto } from './dto/payment.dto';
+import { CreatePayoutRequestDto, ReviewPayoutDto } from './dto/payout.dto';
 import { JwtAuthGuard } from '../../auth/jwt-auth.guard';
 import { RolesGuard } from '../../auth/roles.guard';
 import { Roles } from '../../auth/roles.decorator';
@@ -69,15 +73,18 @@ export class PartnerWalletController {
   @ApiOperation({ summary: 'Xem lịch sử giao dịch ví (phân trang)' })
   @ApiQuery({ name: 'page', required: false, type: Number })
   @ApiQuery({ name: 'limit', required: false, type: Number })
+  @ApiQuery({ name: 'storeId', required: false, type: Number, description: 'Lọc lịch sử giao dịch theo chi nhánh' })
   getHistory(
     @Request() req: any,
     @Query('page') page?: string,
     @Query('limit') limit?: string,
+    @Query('storeId') storeId?: string,
   ) {
     return this.paymentsService.getWalletHistory(
       req.user.id,
       page ? parseInt(page, 10) : 1,
       limit ? parseInt(limit, 10) : 20,
+      storeId ? parseInt(storeId, 10) : undefined,
     );
   }
 
@@ -91,6 +98,117 @@ export class PartnerWalletController {
   createDepositLink(@Request() req: any, @Body() dto: DepositWalletDto) {
     return this.paymentsService.createDepositLink(req.user.id, dto);
   }
+
+  @Post('payout')
+  @ApiOperation({
+    summary: 'Yêu cầu rút tiền về tài khoản ngân hàng (Partner)',
+    description: 'Đối tác tạo yêu cầu rút số dư khả dụng về số tài khoản ngân hàng đã đăng ký.',
+  })
+  @ApiResponse({ status: 201, description: 'Tạo yêu cầu rút tiền thành công, chờ Admin duyệt' })
+  requestPayout(@Request() req: any, @Body() dto: CreatePayoutRequestDto) {
+    return this.paymentsService.requestPayout(req.user.id, dto);
+  }
+
+  @Get('payouts')
+  @ApiOperation({ summary: 'Xem danh sách yêu cầu rút tiền của Partner' })
+  getMyPayouts(@Request() req: any) {
+    return this.paymentsService.getPayoutRequestsForPartner(req.user.id);
+  }
+}
+
+// ─── ADMIN: Quản lý Yêu cầu rút tiền của các Partner ──────────────────────────
+
+@ApiTags('Admin - Payouts')
+@ApiBearerAuth()
+@UseGuards(JwtAuthGuard, RolesGuard)
+@Roles(0) // Admin only
+@Controller('admin/payouts')
+export class AdminPayoutsController {
+  constructor(private readonly paymentsService: PaymentsService) {}
+
+  @Get()
+  @ApiOperation({ summary: 'Xem tất cả yêu cầu rút tiền từ đối tác' })
+  @ApiQuery({ name: 'status', required: false, type: Number, description: '0: PENDING, 1: APPROVED, 2: REJECTED' })
+  @ApiQuery({ name: 'search', required: false, type: String })
+  @ApiQuery({ name: 'fromDate', required: false, type: String })
+  @ApiQuery({ name: 'toDate', required: false, type: String })
+  getAllPayouts(
+    @Query('status') status?: string,
+    @Query('search') search?: string,
+    @Query('fromDate') fromDate?: string,
+    @Query('toDate') toDate?: string,
+  ) {
+    const statusNum = status !== undefined && status !== '' ? parseInt(status, 10) : undefined;
+    return this.paymentsService.getPayoutRequestsForAdmin({
+      status: statusNum,
+      search,
+      fromDate,
+      toDate,
+    });
+  }
+
+  @Patch(':id')
+  @ApiOperation({ summary: 'Phê duyệt hoặc từ chối yêu cầu rút tiền' })
+  reviewPayout(
+    @Request() req: any,
+    @Param('id', ParseIntPipe) id: number,
+    @Body() dto: ReviewPayoutDto,
+  ) {
+    return this.paymentsService.reviewPayout(req.user.id, id, dto);
+  }
+}
+
+// ─── ADMIN: Quản lý Tất cả Giao dịch trên Sàn (PayOS & Ví) ───────────────────
+
+@ApiTags('Admin - Transactions')
+@ApiBearerAuth()
+@UseGuards(JwtAuthGuard, RolesGuard)
+@Roles(0) // Admin only
+@Controller('admin/transactions')
+export class AdminTransactionsController {
+  constructor(private readonly paymentsService: PaymentsService) {}
+
+  @Get('payments')
+  @ApiOperation({ summary: 'Xem tất cả giao dịch thanh toán PayOS / Cọc đơn' })
+  @ApiQuery({ name: 'search', required: false, type: String })
+  @ApiQuery({ name: 'status', required: false, type: Number })
+  @ApiQuery({ name: 'fromDate', required: false, type: String })
+  @ApiQuery({ name: 'toDate', required: false, type: String })
+  getPayments(
+    @Query('search') search?: string,
+    @Query('status') status?: string,
+    @Query('fromDate') fromDate?: string,
+    @Query('toDate') toDate?: string,
+  ) {
+    const statusNum = status !== undefined && status !== '' ? parseInt(status, 10) : undefined;
+    return this.paymentsService.getAllPaymentsForAdmin({
+      search,
+      status: statusNum,
+      fromDate,
+      toDate,
+    });
+  }
+
+  @Get('wallet-histories')
+  @ApiOperation({ summary: 'Xem tất cả biến động số dư ví đối tác toàn sàn' })
+  @ApiQuery({ name: 'search', required: false, type: String })
+  @ApiQuery({ name: 'type', required: false, type: Number })
+  @ApiQuery({ name: 'fromDate', required: false, type: String })
+  @ApiQuery({ name: 'toDate', required: false, type: String })
+  getWalletHistories(
+    @Query('search') search?: string,
+    @Query('type') type?: string,
+    @Query('fromDate') fromDate?: string,
+    @Query('toDate') toDate?: string,
+  ) {
+    const typeNum = type !== undefined && type !== '' ? parseInt(type, 10) : undefined;
+    return this.paymentsService.getAllWalletHistoriesForAdmin({
+      search,
+      type: typeNum,
+      fromDate,
+      toDate,
+    });
+  }
 }
 
 // ─── PUBLIC: PayOS Webhook receiver ───────────────────────────────────────────
@@ -101,6 +219,7 @@ export class WebhookController {
   constructor(private readonly paymentsService: PaymentsService) {}
 
   @Post('payment')
+  @HttpCode(HttpStatus.OK)
   @ApiOperation({
     summary: 'PayOS Webhook — nhận callback thanh toán (Flow 3 & Flow 5)',
     description: `

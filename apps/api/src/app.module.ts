@@ -5,6 +5,8 @@ import { AuthModule } from './auth/auth.module';
 import { StoresModule } from './stores/stores.module';
 import { VehiclesModule } from './vehicles/vehicles.module';
 import { BookingsModule } from './modules/bookings/bookings.module';
+import { PaymentsModule } from './modules/payments/payments.module';
+import { SystemConfigModule } from './modules/system-config/system-config.module';
 import { JobsModule } from './jobs/jobs.module';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
@@ -20,6 +22,8 @@ import { AppService } from './app.service';
     StoresModule,
     VehiclesModule,
     BookingsModule,
+    PaymentsModule,
+    SystemConfigModule,
     JobsModule,
   ],
   controllers: [AppController],

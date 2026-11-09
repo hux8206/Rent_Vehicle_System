@@ -36,15 +36,11 @@ export class CustomerBookingsController {
   @ApiOperation({
     summary: 'Tạo đơn đặt xe & giữ chỗ 10 phút (Flow 2)',
     description: `
-**Yêu cầu bắt buộc:**
-- \`driverLicenseFront\` và \`driverLicenseBack\`: URL ảnh 2 mặt GPLX để xác minh danh tính.
-
 **Quy trình xử lý (Flow 2):**
 1. Kiểm tra xe khả dụng theo [startTime, endTime] theo công thức Flow 1.
 2. Tính dayRent = CEIL(giờ / 24), rentAmount, depositAmount, commissionAmount.
 3. Tạo Booking (status=0, holdExpiresAt=NOW+10min) + BookingDetail + Payment (Pending).
-4. Lưu ảnh GPLX vào profile Customer.
-5. Trả về transactionRef để Customer thanh toán VietQR.
+4. Trả về transactionRef để Customer thanh toán VietQR.
     `,
   })
   @ApiResponse({ status: 201, description: 'Đặt xe & giữ chỗ thành công, trả về transactionRef' })
@@ -74,6 +70,16 @@ export class CustomerBookingsController {
   cancelBooking(@Request() req: any, @Param('id', ParseIntPipe) id: number) {
     return this.bookingsService.cancelBooking(req.user.id, id);
   }
+
+  @Post(':id/review')
+  @ApiOperation({ summary: 'Gửi đánh giá trải nghiệm cho đơn thuê đã hoàn thành' })
+  createReview(
+    @Request() req: any,
+    @Param('id', ParseIntPipe) id: number,
+    @Body() dto: { rateStar: number; comment?: string },
+  ) {
+    return this.bookingsService.createReview(req.user.id, id, dto);
+  }
 }
 
 // ─── PARTNER BOOKING ROUTES ───────────────────────────────────────────────────
@@ -89,9 +95,15 @@ export class PartnerBookingsController {
   @Get()
   @ApiOperation({ summary: 'Xem danh sách đơn thuê thuộc stores của Partner' })
   @ApiQuery({ name: 'status', required: false, type: Number, description: '0-5, bỏ trống để lấy tất cả' })
-  getPartnerBookings(@Request() req: any, @Query('status') status?: string) {
-    const statusNum = status !== undefined ? parseInt(status, 10) : undefined;
-    return this.bookingsService.findPartnerBookings(req.user.id, statusNum);
+  @ApiQuery({ name: 'storeId', required: false, type: Number, description: 'Lọc theo ID chi nhánh' })
+  getPartnerBookings(
+    @Request() req: any,
+    @Query('status') status?: string,
+    @Query('storeId') storeId?: string,
+  ) {
+    const statusNum = status !== undefined && status !== '' ? parseInt(status, 10) : undefined;
+    const storeIdNum = storeId !== undefined && storeId !== '' ? parseInt(storeId, 10) : undefined;
+    return this.bookingsService.findPartnerBookings(req.user.id, statusNum, storeIdNum);
   }
 
   @Post(':id/handover')
@@ -118,4 +130,57 @@ export class PartnerBookingsController {
     return this.bookingsService.completeBooking(req.user.id, id);
   }
 }
+
+// ─── ADMIN REVIEW MODERATION ROUTES ──────────────────────────────────────────
+
+@ApiTags('Admin - Reviews')
+@ApiBearerAuth()
+@UseGuards(JwtAuthGuard, RolesGuard)
+@Roles(0) // Admin only
+@Controller('admin/reviews')
+export class AdminReviewsController {
+  constructor(private readonly bookingsService: BookingsService) {}
+
+  @Get()
+  @ApiOperation({ summary: 'Lấy toàn bộ đánh giá của khách hàng trên hệ thống' })
+  findAll() {
+    return this.bookingsService.findAllReviews();
+  }
+
+  @Post(':id/hide')
+  @ApiOperation({ summary: 'Ẩn đánh giá vi phạm tiêu chuẩn cộng đồng' })
+  hide(@Param('id', ParseIntPipe) id: number, @Body('hiddenReason') hiddenReason: string) {
+    return this.bookingsService.hideReview(id, hiddenReason || 'Vi phạm tiêu chuẩn cộng đồng');
+  }
+
+  @Post(':id/unhide')
+  @ApiOperation({ summary: 'Bỏ ẩn đánh giá' })
+  unhide(@Param('id', ParseIntPipe) id: number) {
+    return this.bookingsService.unhideReview(id);
+  }
+}
+
+// ─── ADMIN STATS & BOOKINGS ROUTES ──────────────────────────────────────────
+
+@ApiTags('Admin - Statistics & Bookings')
+@ApiBearerAuth()
+@UseGuards(JwtAuthGuard, RolesGuard)
+@Roles(0) // Admin only
+@Controller('admin')
+export class AdminStatsController {
+  constructor(private readonly bookingsService: BookingsService) {}
+
+  @Get('stats')
+  @ApiOperation({ summary: 'Lấy toàn bộ số liệu thống kê thực tế sàn (Doanh thu, hoa hồng, trạng thái đơn, đội xe)' })
+  getPlatformStats() {
+    return this.bookingsService.getPlatformStats();
+  }
+
+  @Get('bookings')
+  @ApiOperation({ summary: 'Lấy tất cả đơn thuê trên toàn hệ thống sàn' })
+  getAllBookings() {
+    return this.bookingsService.findAllBookingsForAdmin();
+  }
+}
+
 

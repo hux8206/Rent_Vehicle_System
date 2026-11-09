@@ -22,6 +22,11 @@ export class SearchVehiclesDto {
   @IsString()
   brand?: string;
 
+  @ApiPropertyOptional({ example: 'Đà Nẵng', description: 'Lọc theo Tỉnh / Thành phố' })
+  @IsOptional()
+  @IsString()
+  province?: string;
+
   @ApiPropertyOptional({ example: 1, description: 'Filter theo storeId' })
   @IsOptional()
   @IsInt()

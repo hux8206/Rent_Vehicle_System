@@ -1,5 +1,6 @@
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
-import { IsNotEmpty, IsOptional, IsString } from 'class-validator';
+import { IsArray, IsNotEmpty, IsOptional, IsString, ValidateNested } from 'class-validator';
+import { Type } from 'class-transformer';
 
 export class CreateVehicleItemDto {
   @ApiProperty({ example: '43B1-999.88', description: 'Biển số xe' })
@@ -17,3 +18,12 @@ export class CreateVehicleItemDto {
   @IsString()
   chassisNumber?: string;
 }
+
+export class BulkCreateVehicleItemDto {
+  @ApiProperty({ type: [CreateVehicleItemDto], description: 'Danh sách các xe vật lý cần thêm hàng loạt' })
+  @IsArray()
+  @ValidateNested({ each: true })
+  @Type(() => CreateVehicleItemDto)
+  items: CreateVehicleItemDto[];
+}
+

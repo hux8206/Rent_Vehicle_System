@@ -1,0 +1,66 @@
+export interface BankOption {
+  code: string;
+  name: string;
+  shortName: string;
+}
+
+export const VIETNAMESE_BANKS: BankOption[] = [
+  { code: "VCB", shortName: "Vietcombank", name: "Vietcombank - Ngân hàng Ngoại Thương Việt Nam" },
+  { code: "MB", shortName: "MBBank", name: "MBBank - Ngân hàng Quân Đội" },
+  { code: "TCB", shortName: "Techcombank", name: "Techcombank - Ngân hàng Kỹ Thương Việt Nam" },
+  { code: "BIDV", shortName: "BIDV", name: "BIDV - Ngân hàng Đầu Tư & Phát Triển Việt Nam" },
+  { code: "CTG", shortName: "VietinBank", name: "VietinBank - Ngân hàng Công Thương Việt Nam" },
+  { code: "ACB", shortName: "ACB", name: "ACB - Ngân hàng Á Châu" },
+  { code: "VPB", shortName: "VPBank", name: "VPBank - Ngân hàng Việt Nam Thịnh Vượng" },
+  { code: "TPB", shortName: "TPBank", name: "TPBank - Ngân hàng Tiên Phong" },
+  { code: "STB", shortName: "Sacombank", name: "Sacombank - Ngân hàng Sài Gòn Thương Tín" },
+  { code: "HDB", shortName: "HDBank", name: "HDBank - Ngân hàng Phát Triển TP.HCM" },
+  { code: "VIB", shortName: "VIB", name: "VIB - Ngân hàng Quốc Tế" },
+  { code: "SHB", shortName: "SHB", name: "SHB - Ngân hàng Sài Gòn - Hà Nội" },
+  { code: "MSB", shortName: "MSB", name: "MSB - Ngân hàng Hàng Hải" },
+  { code: "OCB", shortName: "OCB", name: "OCB - Ngân hàng Phương Đông" },
+  { code: "LPB", shortName: "LPBank", name: "LPBank - Ngân hàng Lộc Phát Việt Nam" },
+  { code: "VBA", shortName: "Agribank", name: "Agribank - Ngân hàng Nông Nghiệp & PTNT" },
+  { code: "SEAB", shortName: "SeABank", name: "SeABank - Ngân hàng Đông Nam Á" },
+  { code: "EIB", shortName: "Eximbank", name: "Eximbank - Ngân hàng Xuất Nhập Khẩu" },
+  { code: "CAKE", shortName: "Cake by VPBank", name: "Cake by VPBank - Ngân hàng số Cake" },
+  { code: "TIMO", shortName: "Timo by BVBank", name: "Timo by BVBank - Ngân hàng số Timo" },
+];
+
+export const VIETNAMESE_PROVINCES: string[] = [
+  "An Giang",
+  "Bắc Ninh",
+  "Cà Mau",
+  "Cao Bằng",
+  "Đắk Lắk",
+  "Điện Biên",
+  "Đồng Nai",
+  "Đồng Tháp",
+  "Gia Lai",
+  "Hà Tĩnh",
+  "Hưng Yên",
+  "Khánh Hoà",
+  "Lai Châu",
+  "Lâm Đồng",
+  "Lạng Sơn",
+  "Lào Cai",
+  "Nghệ An",
+  "Ninh Bình",
+  "Phú Thọ",
+  "Quảng Ngãi",
+  "Quảng Ninh",
+  "Quảng Trị",
+  "Sơn La",
+  "Tây Ninh",
+  "Thái Nguyên",
+  "Thanh Hóa",
+  "TP. Cần Thơ",
+  "TP. Đà Nẵng",
+  "TP. Hà Nội",
+  "TP. Hải Phòng",
+  "TP. Hồ Chí Minh",
+  "TP. Huế",
+  "Tuyên Quang",
+  "Vĩnh Long",
+];
+

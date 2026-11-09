@@ -15,7 +15,8 @@ import { ApiBearerAuth, ApiOperation, ApiQuery, ApiResponse, ApiTags } from '@ne
 import { VehiclesService } from './vehicles.service';
 import { CreateVehicleModelDto } from './dto/create-vehicle-model.dto';
 import { UpdateVehicleModelDto } from './dto/update-vehicle-model.dto';
-import { CreateVehicleItemDto } from './dto/create-vehicle-item.dto';
+import { CreateVehicleItemDto, BulkCreateVehicleItemDto } from './dto/create-vehicle-item.dto';
+import { UpdateVehicleItemDto } from './dto/update-vehicle-item.dto';
 import { UpdateVehicleItemStatusDto } from './dto/update-vehicle-item-status.dto';
 import { SearchVehiclesDto } from './dto/search-vehicles.dto';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
@@ -41,10 +42,14 @@ export class PartnerVehiclesController {
   }
 
   @Get('models')
-  @ApiOperation({ summary: 'Lấy danh sách dòng xe theo storeId' })
-  @ApiQuery({ name: 'storeId', required: true, type: Number })
-  findAllModels(@Request() req: any, @Query('storeId', ParseIntPipe) storeId: number) {
-    return this.vehiclesService.findAllModels(req.user.id, storeId);
+  @ApiOperation({ summary: 'Lấy danh sách dòng xe (có thể lọc theo storeId hoặc lấy tất cả dòng xe của Partner)' })
+  @ApiQuery({ name: 'storeId', required: false, type: Number })
+  findAllModels(
+    @Request() req: any,
+    @Query('storeId') storeId?: string,
+  ) {
+    const storeIdNum = storeId ? parseInt(storeId, 10) : undefined;
+    return this.vehiclesService.findAllModels(req.user.id, storeIdNum);
   }
 
   @Get('models/:id')
@@ -81,10 +86,31 @@ export class PartnerVehiclesController {
     return this.vehiclesService.addVehicleItem(req.user.id, modelId, dto);
   }
 
+  @Post('models/:modelId/items/bulk')
+  @ApiOperation({ summary: 'Thêm nhiều xe vào dòng xe từ file (CSV/Excel)' })
+  @ApiResponse({ status: 201, description: 'Thêm danh sách xe thành công' })
+  addBulkItems(
+    @Request() req: any,
+    @Param('modelId', ParseIntPipe) modelId: number,
+    @Body() dto: BulkCreateVehicleItemDto,
+  ) {
+    return this.vehiclesService.addBulkVehicleItems(req.user.id, modelId, dto.items);
+  }
+
   @Get('models/:modelId/items')
   @ApiOperation({ summary: 'Xem danh sách biển số xe của 1 dòng xe' })
   getItems(@Request() req: any, @Param('modelId', ParseIntPipe) modelId: number) {
     return this.vehiclesService.getVehicleItems(req.user.id, modelId);
+  }
+
+  @Put('items/:itemId')
+  @ApiOperation({ summary: 'Cập nhật thông tin chi tiết xe (biển số, màu sơn, số khung, trạng thái)' })
+  updateItem(
+    @Request() req: any,
+    @Param('itemId', ParseIntPipe) itemId: number,
+    @Body() dto: UpdateVehicleItemDto,
+  ) {
+    return this.vehiclesService.updateVehicleItem(req.user.id, itemId, dto);
   }
 
   @Put('items/:itemId/status')

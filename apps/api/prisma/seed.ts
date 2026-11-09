@@ -306,7 +306,6 @@ async function main() {
       phone: '0911222333',
       role: 2, // 2: Customer
       status: true,
-      driverLicense: 'B2-079198002134',
     },
   });
 
@@ -320,7 +319,6 @@ async function main() {
       phone: '0988777666',
       role: 2, // 2: Customer
       status: true,
-      driverLicense: 'A1-001199004567',
     },
   });
 

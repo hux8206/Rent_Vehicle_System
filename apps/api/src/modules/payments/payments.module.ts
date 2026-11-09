@@ -2,6 +2,8 @@ import { Module } from '@nestjs/common';
 import {
   CustomerPaymentsController,
   PartnerWalletController,
+  AdminPayoutsController,
+  AdminTransactionsController,
   WebhookController,
 } from './payments.controller';
 import { PaymentsService } from './payments.service';
@@ -13,6 +15,8 @@ import { PrismaModule } from '../../prisma/prisma.module';
   controllers: [
     CustomerPaymentsController,
     PartnerWalletController,
+    AdminPayoutsController,
+    AdminTransactionsController,
     WebhookController,
   ],
   providers: [PaymentsService, PayosService],

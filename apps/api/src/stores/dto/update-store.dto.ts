@@ -7,6 +7,11 @@ export class UpdateStoreDto {
   @IsString()
   storeName?: string;
 
+  @ApiPropertyOptional({ example: 'Đà Nẵng' })
+  @IsOptional()
+  @IsString()
+  province?: string;
+
   @ApiPropertyOptional()
   @IsOptional()
   @IsString()
@@ -26,5 +31,15 @@ export class UpdateStoreDto {
   @IsOptional()
   @IsString()
   storeImage?: string;
+
+  @ApiPropertyOptional({ example: '07:00' })
+  @IsOptional()
+  @IsString()
+  openTime?: string;
+
+  @ApiPropertyOptional({ example: '21:00' })
+  @IsOptional()
+  @IsString()
+  closeTime?: string;
 }
 

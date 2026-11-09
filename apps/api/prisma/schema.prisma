@@ -15,18 +15,17 @@ model User {
   phone          String   @db.VarChar(20)
   role           Int      @default(2) // 0: Admin, 1: Partner, 2: Customer
   status         Boolean  @default(true)
-  driverLicense      String?  @db.VarChar(50)
-  driverLicenseFront String?  @db.VarChar(500)
-  driverLicenseBack  String?  @db.VarChar(500)
   bankAccountNum     String?  @db.VarChar(50)
   bankName           String?  @db.VarChar(100)
+  ownerPasswordHash  String?  @db.VarChar(255)
   createdAt      DateTime @default(now())
 
-  stores         Store[]
-  bookings       Booking[]
-  partnerWallet  PartnerWallet?
-  reviews        Review[]
-  notifications  Notification[]
+  stores              Store[]
+  bookings            Booking[]
+  partnerWallet       PartnerWallet?
+  payoutRequests      PayoutRequest[]
+  reviews             Review[]
+  storeUpdateRequests StoreUpdateRequest[]
 
   @@map("users")
 }
@@ -35,19 +34,24 @@ model Store {
   id           Int     @id @default(autoincrement())
   partnerId    Int
   storeName    String  @db.VarChar(255)
+  province     String? @db.VarChar(100)
   address      String  @db.VarChar(500)
   phoneContact String  @db.VarChar(20)
   description  String? @db.Text
   storeImage   String? @db.VarChar(500)
   status       Int     @default(0) // 0: PENDING, 1: ACTIVE, 2: REJECTED
   rejectReason String? @db.VarChar(500)
+  openTime     String? @default("07:00") @db.VarChar(10)
+  closeTime    String? @default("21:00") @db.VarChar(10)
 
   partner       User           @relation(fields: [partnerId], references: [id])
   rentalPolicy  RentalPolicy?
   vehicleModels VehicleModel[]
   bookings      Booking[]
   reviews       Review[]
+  updateRequests StoreUpdateRequest[]
 
+  @@index([status, province])
   @@map("stores")
 }
 
@@ -77,6 +81,7 @@ model VehicleModel {
   vehicleItems   VehicleItem[]
   bookingDetails BookingDetail[]
 
+  @@index([storeId, type])
   @@map("vehicle_models")
 }
 
@@ -166,6 +171,7 @@ model WalletHistory {
   wallet  PartnerWallet @relation(fields: [walletId], references: [id])
   booking Booking?      @relation(fields: [bookingId], references: [id])
 
+  @@index([walletId, createdAt])
   @@map("wallet_histories")
 }
 
@@ -200,18 +206,60 @@ model Review {
   customer User    @relation(fields: [customerId], references: [id])
   store    Store   @relation(fields: [storeId], references: [id])
 
+  @@index([storeId, isHidden])
   @@map("reviews")
 }
 
-model Notification {
-  id          Int      @id @default(autoincrement())
-  recipientId Int
-  title       String   @db.VarChar(255)
-  content     String   @db.Text
-  isRead      Boolean  @default(false)
-  createdAt   DateTime @default(now())
+model SystemConfig {
+  id                Int      @id @default(autoincrement())
+  commissionRate    Decimal  @default(10.00) @db.Decimal(5, 2) // % hoa hồng sàn (mặc định 10%)
+  creditLimit       Decimal  @default(500000.00) @db.Decimal(12, 2) // Hạn mức âm cho phép (mặc định 500k)
+  minDepositPercent Decimal  @default(15.00) @db.Decimal(5, 2) // % cọc tối thiểu toàn hệ thống (mặc định 15%)
+  updatedAt         DateTime @updatedAt
 
-  recipient User @relation(fields: [recipientId], references: [id])
+  @@map("system_configs")
+}
 
-  @@map("notifications")
+model PayoutRequest {
+  id             Int      @id @default(autoincrement())
+  partnerId      Int
+  amount         Decimal  @db.Decimal(12, 2)
+  bankAccountNum String   @db.VarChar(50)
+  bankName       String   @db.VarChar(100)
+  accountHolder  String   @db.VarChar(150)
+  status         Int      @default(0) // 0: PENDING, 1: APPROVED, 2: REJECTED
+  note           String?  @db.VarChar(255)
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  partner User @relation(fields: [partnerId], references: [id])
+
+  @@map("payout_requests")
+}
+
+model StoreUpdateRequest {
+  id             Int      @id @default(autoincrement())
+  storeId        Int
+  partnerId      Int
+  storeName      String   @db.VarChar(255)
+  province       String?  @db.VarChar(100)
+  address        String   @db.VarChar(500)
+  phoneContact   String   @db.VarChar(20)
+  description    String?  @db.Text
+  storeImage     String?  @db.VarChar(500)
+  depositPercent Decimal  @db.Decimal(5, 2)
+  cancelRule     String?  @db.Text
+  bankAccountNum String?  @db.VarChar(50)
+  bankName       String?  @db.VarChar(100)
+  openTime       String?  @db.VarChar(10)
+  closeTime      String?  @db.VarChar(10)
+  status         Int      @default(0) // 0: PENDING, 1: APPROVED, 2: REJECTED
+  rejectReason   String?  @db.VarChar(500)
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  store   Store @relation(fields: [storeId], references: [id], onDelete: Cascade)
+  partner User  @relation(fields: [partnerId], references: [id])
+
+  @@map("store_update_requests")
 }

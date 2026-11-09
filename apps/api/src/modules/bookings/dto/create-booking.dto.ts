@@ -63,23 +63,5 @@ export class CreateBookingDto {
   @Max(1)
   @Type(() => Number)
   paymentType: number;
-
-  @ApiProperty({
-    example: 'https://storage.example.com/licenses/front_abc123.jpg',
-    description:
-      'URL ảnh mặt trước Giấy phép lái xe (GPLX) — bắt buộc để xác minh danh tính khi tạo đơn thuê',
-  })
-  @IsString()
-  @IsNotEmpty()
-  driverLicenseFront: string;
-
-  @ApiProperty({
-    example: 'https://storage.example.com/licenses/back_abc123.jpg',
-    description:
-      'URL ảnh mặt sau Giấy phép lái xe (GPLX) — bắt buộc để xác minh danh tính khi tạo đơn thuê',
-  })
-  @IsString()
-  @IsNotEmpty()
-  driverLicenseBack: string;
 }
 
