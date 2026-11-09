@@ -1,10 +1,14 @@
 version: '3.8'
 
 services:
+  # ==========================================
+  # 1. Cơ sở dữ liệu MySQL 8.0
+  # ==========================================
   mysql:
     image: mysql:8.0
     container_name: vehicle_rent_mysql
-    restart: always
+    restart: unless-stopped
+    command: --default-authentication-plugin=mysql_native_password --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
     environment:
       MYSQL_ROOT_PASSWORD: ''
       MYSQL_ALLOW_EMPTY_PASSWORD: 'yes'
@@ -13,9 +17,64 @@ services:
       - '3306:3306'
     volumes:
       - mysql_data:/var/lib/mysql
-    command: --default-authentication-plugin=mysql_native_password
+    healthcheck:
+      test: ['CMD', 'mysqladmin', 'ping', '-h', 'localhost']
+      interval: 5s
+      timeout: 5s
+      retries: 15
+      start_period: 10s
+
+  # ==========================================
+  # 2. Backend API (NestJS + Prisma)
+  # ==========================================
+  api:
+    build:
+      context: ./apps/api
+      dockerfile: Dockerfile
+    container_name: vehicle_rent_api
+    restart: unless-stopped
+    ports:
+      - '4000:4000'
+    environment:
+      NODE_ENV: production
+      PORT: 4000
+      DATABASE_URL: mysql://root:@mysql:3306/Rent_vehicle_system
+      JWT_SECRET: ${JWT_SECRET:-vehiclerent_super_secret_key_2026}
+      JWT_EXPIRES_IN: ${JWT_EXPIRES_IN:-7d}
+      PAYOS_CLIENT_ID: ${PAYOS_CLIENT_ID:-87c67de5-87b9-4338-a1e4-a30afa4f1cec}
+      PAYOS_API_KEY: ${PAYOS_API_KEY:-9d8081ab-4a05-4195-88fd-b695e3af9e05}
+      PAYOS_CHECKSUM_KEY: ${PAYOS_CHECKSUM_KEY:-d2b80f7f6ba09693b120f58390531d85bf78e0bf57c94d862a7158bec109b7fa}
+    depends_on:
+      mysql:
+        condition: service_healthy
+
+  # ==========================================
+  # 3. Frontend Web (Next.js 14 App Router)
+  # ==========================================
+  web:
+    build:
+      context: ./apps/web
+      dockerfile: Dockerfile
+      args:
+        NEXT_PUBLIC_API_URL: ${NEXT_PUBLIC_API_URL:-http://localhost:4000/api}
+    container_name: vehicle_rent_web
+    restart: unless-stopped
+    ports:
+      - '3000:3000'
+    environment:
+      NODE_ENV: production
+      PORT: 3000
+      NEXT_PUBLIC_API_URL: ${NEXT_PUBLIC_API_URL:-http://localhost:4000/api}
+      CLOUDINARY_CLOUD_NAME: ${CLOUDINARY_CLOUD_NAME:-dpfaidsiw}
+      CLOUDINARY_API_KEY: ${CLOUDINARY_API_KEY:-719494448499853}
+      CLOUDINARY_API_SECRET: ${CLOUDINARY_API_SECRET:-tUnsWIrBiHeXbiD2xuczbOAwIHM}
+    volumes:
+      - uploads_data:/app/public/uploads
+    depends_on:
+      - api
 
 volumes:
   mysql_data:
     driver: local
-
+  uploads_data:
+    driver: local
