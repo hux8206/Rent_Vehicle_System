@@ -16,12 +16,10 @@ import {
   CheckCircle2,
   Bike,
   Star,
-  Zap,
   Info,
   MessageSquare,
   User as UserIcon,
   Calendar,
-  Sparkles,
   Clock,
 } from "lucide-react";
 
@@ -67,7 +65,7 @@ export default function StoreDetailPage() {
   if (!store) {
     return (
       <div className="container max-w-lg mx-auto py-24 px-4 text-center space-y-4">
-        <div className="h-16 w-16 bg-amber-50 text-amber-600 rounded-3xl flex items-center justify-center mx-auto border border-amber-200">
+        <div className="h-16 w-16 bg-amber-50 text-amber-600 rounded-2xl flex items-center justify-center mx-auto border border-amber-200">
           <StoreIcon className="h-8 w-8" />
         </div>
         <h2 className="text-2xl font-black text-slate-900">Chi nhánh hiện không khả dụng</h2>
@@ -77,7 +75,7 @@ export default function StoreDetailPage() {
         <div className="pt-2">
           <Link href="/stores">
             <Button className="rounded-xl font-bold bg-blue-600 hover:bg-blue-700 text-white text-xs gap-1.5 shadow-xs">
-              <ArrowLeft className="h-4 w-4" /> Xem Danh Sách Nhà Xe Khác
+              <ArrowLeft className="h-4 w-4" /> Xem danh sách cửa hàng
             </Button>
           </Link>
         </div>
@@ -102,11 +100,11 @@ export default function StoreDetailPage() {
         </Link>
 
         {/* Store Header Banner Card */}
-        <div className="rounded-3xl border border-slate-200/90 bg-white overflow-hidden shadow-xs">
+        <div className="rounded-2xl border border-slate-200/90 bg-white overflow-hidden shadow-xs">
           <div className="relative h-64 sm:h-72 w-full bg-slate-900">
             <img
               src={store.storeImage || "https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?w=1200&q=80"}
-              alt={store.storeName}
+              alt={`Hình ảnh mặt tiền nhà xe ${store.storeName} - ${store.province || store.address || ""}`}
               className="w-full h-full object-cover opacity-80"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/40 to-transparent" />
@@ -124,16 +122,16 @@ export default function StoreDetailPage() {
                     </span>
                   </span>
                   {store.province && (
-                    <span className="bg-white/20 backdrop-blur-md text-white font-semibold text-[10px] px-2.5 py-1 rounded-full flex items-center gap-1">
+                    <span className="bg-slate-900/90 text-white font-semibold text-[10px] px-2.5 py-1 rounded-full border border-slate-700/60 flex items-center gap-1">
                       <MapPin className="h-3 w-3 text-blue-300" />
                       {store.province}
                     </span>
                   )}
-                  <span className="bg-purple-600/90 backdrop-blur-md text-white font-bold text-[10px] px-2.5 py-1 rounded-full flex items-center gap-1 shadow-xs">
-                    <Clock className="h-3 w-3 text-purple-200" />
+                  <span className="bg-slate-900/90 text-white font-bold text-[10px] px-2.5 py-1 rounded-full flex items-center gap-1 shadow-xs border border-slate-700/60">
+                    <Clock className="h-3 w-3 text-cyan-300" />
                     Mở cửa: {store.openTime || "07:00"} - {store.closeTime || "21:00"}
                   </span>
-                  <span className="bg-blue-600/80 backdrop-blur-md text-white font-semibold text-[10px] px-2.5 py-1 rounded-full">
+                  <span className="bg-blue-700 text-white font-bold text-[10px] px-2.5 py-1 rounded-full border border-blue-500/40">
                     Cọc {depositPercent}%
                   </span>
                 </div>
@@ -144,7 +142,7 @@ export default function StoreDetailPage() {
                 </div>
               </div>
 
-              <div className="bg-white/10 backdrop-blur-md border border-white/20 p-3 rounded-2xl flex items-center gap-3 shrink-0">
+              <div className="bg-slate-900/90 border border-slate-700 p-3 rounded-2xl flex items-center gap-3 shrink-0 shadow-lg">
                 <div className="h-10 w-10 rounded-xl bg-blue-600 text-white flex items-center justify-center font-bold">
                   <Phone className="h-5 w-5" />
                 </div>
@@ -194,7 +192,7 @@ export default function StoreDetailPage() {
           </div>
 
           {vehicles.length === 0 ? (
-            <div className="bg-white rounded-3xl border border-slate-200 p-8 text-center text-slate-400">
+            <div className="bg-white rounded-2xl border border-slate-200 p-8 text-center text-slate-400">
               <Bike className="h-10 w-10 mx-auto text-slate-300 mb-2" />
               <p className="text-xs font-semibold">Cửa hàng hiện chưa cập nhật dòng xe nào.</p>
             </div>
@@ -209,7 +207,7 @@ export default function StoreDetailPage() {
                     href={`/vehicles/${v.id}`}
                     className="block h-full group outline-none"
                   >
-                    <div className="h-full bg-white rounded-3xl border border-slate-200/90 shadow-xs hover:shadow-xl hover:border-blue-400/50 transition-all duration-300 flex flex-col justify-between overflow-hidden cursor-pointer">
+                    <div className="h-full bg-white rounded-2xl border border-slate-200/90 shadow-xs hover:shadow-xl hover:border-blue-400/50 transition-all duration-300 flex flex-col justify-between overflow-hidden cursor-pointer">
                       <div>
                         <div className="relative h-48 w-full bg-slate-100 overflow-hidden">
                           <img
@@ -218,7 +216,7 @@ export default function StoreDetailPage() {
                                 ? v.images[0]
                                 : "https://images.unsplash.com/photo-1558981403-c5f9899a28bc?auto=format&fit=crop&w=800&q=80"
                             }
-                            alt={v.name}
+                            alt={`Dòng xe ${v.brand ? v.brand + " " : ""}${v.name || ""} tại ${store.storeName}`}
                             className="h-full w-full object-cover group-hover:scale-105 transition-transform duration-500"
                           />
                           <div className="absolute top-3 left-3 flex gap-1.5">
@@ -251,7 +249,7 @@ export default function StoreDetailPage() {
                         </div>
 
                         <div className="flex items-center gap-1 text-xs font-bold text-blue-600 group-hover:translate-x-1 transition-transform">
-                          <span>Chi tiết & Đặt</span>
+                          <span>Xem chi tiết xe</span>
                           <span className="text-sm font-black">→</span>
                         </div>
                       </div>
@@ -282,7 +280,7 @@ export default function StoreDetailPage() {
           </div>
 
           {reviewsList.length === 0 ? (
-            <div className="bg-white rounded-3xl border border-slate-200/90 p-8 text-center text-slate-400">
+            <div className="bg-white rounded-2xl border border-slate-200/90 p-8 text-center text-slate-400">
               <MessageSquare className="h-10 w-10 mx-auto text-slate-300 mb-2" />
               <h4 className="text-sm font-bold text-slate-700">Chưa có đánh giá nào</h4>
               <p className="text-xs text-slate-500 mt-1 max-w-sm mx-auto">

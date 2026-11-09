@@ -318,7 +318,7 @@ export function Navbar() {
               <Button
                 variant="outline"
                 size="sm"
-                className="gap-2 border-2 border-blue-600/30 text-blue-700 bg-blue-50/40 hover:bg-blue-600 hover:text-white hover:border-blue-600 transition-all font-bold text-xs h-9.5 px-3.5 rounded-full shadow-2xs"
+                className="gap-2 border-2 border-blue-600/30 text-blue-700 bg-blue-50/40 hover:bg-blue-600 hover:text-white hover:border-blue-600 transition-all font-bold text-xs h-9.5 px-3.5 rounded-xl shadow-2xs"
               >
                 <Store className="h-4 w-4" />
                 <span>Trở thành Đối tác chủ xe</span>
@@ -333,7 +333,7 @@ export function Navbar() {
                 <Button
                   variant="outline"
                   size="sm"
-                  className="gap-2.5 border-slate-200 hover:border-slate-300 font-medium text-xs sm:text-sm pl-2 pr-3 h-10 rounded-full bg-slate-50/70 cursor-pointer"
+                  className="gap-2.5 border-slate-200 hover:border-slate-300 font-medium text-xs sm:text-sm pl-2 pr-3 h-10 rounded-xl bg-slate-50/70 cursor-pointer"
                 >
                   <div className={`w-7 h-7 rounded-full text-white font-bold text-xs flex items-center justify-center shrink-0 shadow-xs ${
                     isAdmin
@@ -515,7 +515,7 @@ export function Navbar() {
                 <Button
                   variant="ghost"
                   size="sm"
-                  className="text-xs font-bold text-slate-700 hover:text-blue-600 hover:bg-slate-100 rounded-full h-9 px-3 gap-1.5 cursor-pointer"
+                  className="text-xs font-bold text-slate-700 hover:text-blue-600 hover:bg-slate-100 rounded-xl h-9 px-3 gap-1.5 cursor-pointer"
                 >
                   <LogIn className="h-3.5 w-3.5" />
                   <span>Đăng Nhập</span>
@@ -526,7 +526,7 @@ export function Navbar() {
                 <DropdownMenuTrigger asChild>
                   <Button
                     size="sm"
-                    className="bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs h-9 px-3.5 rounded-full shadow-xs gap-1.5 cursor-pointer"
+                    className="bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs h-9 px-3.5 rounded-xl shadow-xs gap-1.5 cursor-pointer"
                   >
                     <UserPlus className="h-3.5 w-3.5" />
                     <span>Đăng Ký</span>

@@ -184,9 +184,6 @@ export default function AdminUsersPage() {
         {/* Header */}
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div>
-            <div className="text-xs font-bold uppercase tracking-wider text-red-600">
-              Quản Trị Hệ Thống
-            </div>
             <h1 className="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight">
               Quản Lý Đối Tác & Khách Hàng Chi Tiết
             </h1>
@@ -204,7 +201,7 @@ export default function AdminUsersPage() {
 
         {/* Top Summary Cards */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-          <Card className="rounded-3xl border-slate-200 shadow-xs bg-white p-5 space-y-2">
+          <Card className="rounded-2xl border-slate-200 shadow-xs bg-white p-5 space-y-2">
             <div className="flex items-center justify-between">
               <span className="text-xs font-bold text-slate-500">Tổng tài khoản</span>
               <div className="h-8 w-8 rounded-xl bg-slate-100 text-slate-700 flex items-center justify-center">
@@ -215,7 +212,7 @@ export default function AdminUsersPage() {
             <span className="text-[11px] text-slate-400">Tất cả tài khoản trong hệ thống</span>
           </Card>
 
-          <Card className="rounded-3xl border-slate-200 shadow-xs bg-white p-5 space-y-2">
+          <Card className="rounded-2xl border-slate-200 shadow-xs bg-white p-5 space-y-2">
             <div className="flex items-center justify-between">
               <span className="text-xs font-bold text-slate-500">Khách thuê xe</span>
               <div className="h-8 w-8 rounded-xl bg-blue-50 text-blue-700 flex items-center justify-center">
@@ -226,7 +223,7 @@ export default function AdminUsersPage() {
             <span className="text-[11px] text-blue-600 font-semibold">Tài khoản khách hàng</span>
           </Card>
 
-          <Card className="rounded-3xl border-slate-200 shadow-xs bg-white p-5 space-y-2">
+          <Card className="rounded-2xl border-slate-200 shadow-xs bg-white p-5 space-y-2">
             <div className="flex items-center justify-between">
               <span className="text-xs font-bold text-slate-500">Đối tác nhà xe</span>
               <div className="h-8 w-8 rounded-xl bg-amber-50 text-amber-700 flex items-center justify-center">
@@ -237,7 +234,7 @@ export default function AdminUsersPage() {
             <span className="text-[11px] text-amber-600 font-semibold">Chủ xe đối tác liên kết</span>
           </Card>
 
-          <Card className="rounded-3xl border-slate-200 shadow-xs bg-white p-5 space-y-2">
+          <Card className="rounded-2xl border-slate-200 shadow-xs bg-white p-5 space-y-2">
             <div className="flex items-center justify-between">
               <span className="text-xs font-bold text-slate-500">Tài khoản bị khóa</span>
               <div className="h-8 w-8 rounded-xl bg-red-50 text-red-700 flex items-center justify-center">
@@ -250,7 +247,7 @@ export default function AdminUsersPage() {
         </div>
 
         {/* Filter Bar */}
-        <div className="flex flex-col md:flex-row items-center justify-between gap-3 bg-white p-4 rounded-3xl border border-slate-200 shadow-xs">
+        <div className="flex flex-col md:flex-row items-center justify-between gap-3 bg-white p-4 rounded-2xl border border-slate-200 shadow-xs">
           <div className="relative w-full md:w-80">
             <Search className="h-4 w-4 text-slate-400 absolute left-3.5 top-3" />
             <Input
@@ -303,7 +300,7 @@ export default function AdminUsersPage() {
         </div>
 
         {/* Users Table */}
-        <Card className="rounded-3xl border-slate-200 shadow-sm bg-white overflow-hidden">
+        <Card className="rounded-2xl border-slate-200 shadow-sm bg-white overflow-hidden">
           <CardContent className="p-0">
             {isLoading ? (
               <div className="text-center py-16 text-slate-500 text-xs">
@@ -487,7 +484,7 @@ export default function AdminUsersPage() {
           }
         }}
       >
-        <DialogContent className="max-w-5xl rounded-3xl p-6 sm:p-7 max-h-[92vh] overflow-y-auto">
+        <DialogContent className="max-w-5xl rounded-2xl p-6 sm:p-7 max-h-[92vh] overflow-y-auto">
           {isLoadingDetail || !userDetail ? (
             <div className="py-16 text-center text-xs text-slate-500">
               Đang tải toàn bộ dữ liệu chi tiết người dùng...
@@ -823,7 +820,7 @@ export default function AdminUsersPage() {
                                     className="h-20 w-24 rounded-xl overflow-hidden bg-slate-100 border shrink-0 cursor-pointer relative group"
                                     title="Nhấn để phóng to ảnh"
                                   >
-                                    <img src={coverImg} alt={m.name} className="w-full h-full object-cover group-hover:scale-105 transition-transform" />
+                                    <img src={coverImg} alt={`Dòng xe ${m.brand ? m.brand + " " : ""}${m.name || ""}`} className="w-full h-full object-cover group-hover:scale-105 transition-transform" />
                                     <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
                                       <ZoomIn className="h-4 w-4 text-white" />
                                     </div>
@@ -1285,7 +1282,7 @@ export default function AdminUsersPage() {
         <Dialog open={!!previewImage} onOpenChange={() => setPreviewImage(null)}>
           <DialogContent className="max-w-3xl p-3 bg-black/90 border-0 rounded-2xl">
             <div className="relative flex items-center justify-center">
-              <img src={previewImage} alt="Preview" className="max-h-[80vh] w-auto rounded-xl object-contain" />
+              <img src={previewImage} alt="Hình ảnh phóng to chi tiết" className="max-h-[80vh] w-auto rounded-xl object-contain" />
               <button
                 onClick={() => setPreviewImage(null)}
                 className="absolute top-2 right-2 p-1.5 rounded-full bg-black/60 text-white hover:bg-black"
@@ -1299,7 +1296,7 @@ export default function AdminUsersPage() {
 
       {/* MODAL: XÁC NHẬN XÓA VĨNH VIỄN TÀI KHOẢN BỊ KHÓA */}
       <Dialog open={!!deletingUser} onOpenChange={() => !isDeleting && setDeletingUser(null)}>
-        <DialogContent className="max-w-md rounded-3xl p-6">
+        <DialogContent className="max-w-md rounded-2xl p-6">
           <DialogHeader>
             <div className="h-12 w-12 rounded-2xl bg-red-100 text-red-600 flex items-center justify-center mb-3">
               <Trash2 className="h-6 w-6" />

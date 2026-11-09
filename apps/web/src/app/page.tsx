@@ -12,7 +12,7 @@ import {
   MapPin,
   Search,
   ShieldCheck,
-  Zap,
+  KeyRound,
   Bike,
   Star,
   Store,
@@ -48,8 +48,6 @@ function HeroVehicleTiltCard() {
 
   const rotateX = useTransform(mouseYSpring, [-0.5, 0.5], ["9deg", "-9deg"]);
   const rotateY = useTransform(mouseXSpring, [-0.5, 0.5], ["-9deg", "9deg"]);
-  const glareX = useTransform(mouseXSpring, [-0.5, 0.5], ["0%", "100%"]);
-  const glareY = useTransform(mouseYSpring, [-0.5, 0.5], ["0%", "100%"]);
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
     const rect = e.currentTarget.getBoundingClientRect();
@@ -68,7 +66,7 @@ function HeroVehicleTiltCard() {
 
   return (
     <div style={{ perspective: 1200 }} className="relative mx-auto max-w-md lg:max-w-none">
-      {/* 3D Tilt Container with Cyan Glow */}
+      {/* 3D Tilt Container */}
       <motion.div
         onMouseMove={handleMouseMove}
         onMouseLeave={handleMouseLeave}
@@ -77,23 +75,15 @@ function HeroVehicleTiltCard() {
           rotateY,
           transformStyle: "preserve-3d",
         }}
-        whileHover={{ scale: 1.02 }}
-        transition={{ type: "spring", stiffness: 300, damping: 20 }}
-        className="relative h-[360px] sm:h-[440px] rounded-3xl overflow-hidden border-2 border-cyan-400/50 shadow-cyan-glow bg-gradient-to-tr from-slate-900 via-slate-800 to-slate-950 cursor-pointer group"
+        whileHover={{ scale: 1.01 }}
+        transition={{ type: "spring", stiffness: 300, damping: 25 }}
+        className="relative h-[360px] sm:h-[440px] rounded-2xl overflow-hidden border border-slate-700/80 shadow-2xl shadow-slate-950/40 bg-slate-900 cursor-pointer group"
       >
-        {/* Specular dynamic reflection following pointer */}
-        <motion.div
-          className="pointer-events-none absolute inset-0 opacity-0 group-hover:opacity-30 transition-opacity duration-300 z-10"
-          style={{
-            background: `radial-gradient(circle 320px at ${glareX} ${glareY}, rgba(6, 182, 212, 0.45), transparent 75%)`,
-          }}
-        />
-
         {/* Vehicle Image */}
         <img
           src="https://images.unsplash.com/photo-1558981403-c5f9899a28bc?auto=format&fit=crop&w=1200&q=80"
-          alt="Honda Air Blade Modern"
-          className="w-full h-full object-cover object-center transform group-hover:scale-105 transition-transform duration-700"
+          alt="Xe tay ga Honda Air Blade 125cc đời mới cho thuê tự lái"
+          className="w-full h-full object-cover object-center transform group-hover:scale-105 transition-transform duration-500"
         />
 
         {/* Soft bottom vignette overlay */}
@@ -104,9 +94,10 @@ function HeroVehicleTiltCard() {
           className="absolute top-4 right-4 z-10"
           style={{ transform: "translateZ(30px)" }}
         >
-          <span className="bg-cyan-500 text-slate-950 font-black text-[11px] px-3 py-1 rounded-full shadow-cyan-glow tracking-wider uppercase">
-            ⚡ Hot Deal 2024
-          </span>
+          <div className="flex items-center gap-1.5 bg-slate-950 border border-slate-700/80 text-white text-[11px] font-semibold px-3 py-1 rounded-full shadow-lg">
+            <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+            <span>Sẵn sàng bàn giao hôm nay</span>
+          </div>
         </div>
 
         {/* Bottom Content inside image (3D Pop-out) */}
@@ -115,7 +106,7 @@ function HeroVehicleTiltCard() {
           style={{ transform: "translateZ(38px)" }}
         >
           <span className="text-[11px] font-bold uppercase tracking-widest text-cyan-300">
-            Được ưa chuộng nhất tuần
+            Dòng xe được yêu thích
           </span>
           <div className="text-xl font-black mt-0.5 text-white">Honda Air Blade 125cc 2024</div>
           <div className="text-xs text-slate-200 mt-1.5 flex items-center justify-between">
@@ -125,11 +116,9 @@ function HeroVehicleTiltCard() {
         </div>
       </motion.div>
 
-      {/* Floating Badge 1: 4.95 / 5.0 (Continuous gentle float) */}
-      <motion.div
-        animate={{ y: [0, -8, 0] }}
-        transition={{ duration: 3.5, repeat: Infinity, ease: "easeInOut" }}
-        className="absolute -top-4 -left-4 sm:-left-6 bg-white rounded-2xl p-3 border border-slate-200 shadow-xl shadow-slate-200/50 flex items-center gap-3 z-20 pointer-events-auto"
+      {/* Floating Badge 1: 4.95 / 5.0 (Stable & Crisp) */}
+      <div
+        className="absolute -top-4 -left-4 sm:-left-6 bg-white rounded-2xl p-3 border border-slate-200 shadow-xl shadow-slate-200/60 flex items-center gap-3 z-20 pointer-events-auto"
       >
         <div className="h-10 w-10 rounded-xl bg-amber-50 text-amber-600 flex items-center justify-center font-bold">
           <Star className="h-5 w-5 fill-amber-400 text-amber-500" />
@@ -140,22 +129,20 @@ function HeroVehicleTiltCard() {
           </div>
           <div className="text-[10px] text-slate-500">1.250+ đánh giá xác thực</div>
         </div>
-      </motion.div>
+      </div>
 
-      {/* Floating Badge 2: Bàn giao xe nhanh (Continuous gentle float) */}
-      <motion.div
-        animate={{ y: [0, -8, 0] }}
-        transition={{ duration: 4.2, repeat: Infinity, ease: "easeInOut", delay: 0.6 }}
-        className="absolute -bottom-4 -right-4 sm:-right-6 bg-white rounded-2xl p-3 border border-slate-200 shadow-xl shadow-slate-200/50 flex items-center gap-3 z-20 pointer-events-auto"
+      {/* Floating Badge 2: Bàn giao xe nhanh (Stable & Crisp) */}
+      <div
+        className="absolute -bottom-4 -right-4 sm:-right-6 bg-white rounded-2xl p-3 border border-slate-200 shadow-xl shadow-slate-200/60 flex items-center gap-3 z-20 pointer-events-auto"
       >
         <div className="h-10 w-10 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center font-bold">
-          <Zap className="h-5 w-5 text-emerald-600" />
+          <KeyRound className="h-5 w-5 text-emerald-600" />
         </div>
         <div>
           <div className="text-xs font-bold text-slate-900">Bàn giao xe nhanh</div>
           <div className="text-[10px] text-slate-500">Giao tận nơi sân bay & khách sạn</div>
         </div>
-      </motion.div>
+      </div>
     </div>
   );
 }
@@ -314,10 +301,10 @@ export default function HomePage() {
             >
               <motion.h1
                 variants={heroItemVariants}
-                className="text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight text-slate-900 leading-[1.12]"
+                className="text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight text-slate-950 leading-[1.12]"
               >
                 Thuê xe tự lái — <br className="hidden sm:inline" />
-                <span className="text-blue-600">Tự do khám phá</span> mọi cung đường
+                tự do khám phá mọi cung đường
               </motion.h1>
 
               <motion.p
@@ -332,11 +319,11 @@ export default function HomePage() {
               <motion.div variants={heroItemVariants} className="pt-2">
                 <form
                   onSubmit={handleSearchSubmit}
-                  className="bg-white rounded-2xl sm:rounded-full border border-slate-200/90 shadow-xl shadow-slate-200/60 p-2 sm:p-2.5 flex flex-col sm:flex-row items-stretch sm:items-center gap-2 transition-all hover:border-slate-300"
+                  className="bg-white rounded-2xl border border-slate-200/90 shadow-xl shadow-slate-200/60 p-2 sm:p-2.5 flex flex-col sm:flex-row items-stretch sm:items-center gap-2 transition-all hover:border-slate-300"
                 >
                   {/* Location field */}
                   <div className="flex-1 px-4 py-2 sm:py-1 border-b sm:border-b-0 sm:border-r border-slate-100 min-w-[200px]">
-                    <span className="text-[10px] uppercase font-bold tracking-wider text-slate-400 block mb-0.5">
+                    <span className="text-xs font-bold text-slate-700 block mb-1">
                       Địa điểm nhận xe
                     </span>
                     <ProvinceCombobox
@@ -353,7 +340,7 @@ export default function HomePage() {
 
                   {/* Pickup date */}
                   <div className="px-4 py-2 sm:py-1 border-b sm:border-b-0 sm:border-r border-slate-100">
-                    <span className="text-[10px] uppercase font-bold tracking-wider text-slate-400 block mb-0.5">
+                    <span className="text-xs font-bold text-slate-700 block mb-1">
                       Bắt đầu thuê
                     </span>
                     <DateTime24hPicker
@@ -366,7 +353,7 @@ export default function HomePage() {
 
                   {/* Return date */}
                   <div className="px-4 py-2 sm:py-1 border-b sm:border-b-0 border-slate-100">
-                    <span className="text-[10px] uppercase font-bold tracking-wider text-slate-400 block mb-0.5">
+                    <span className="text-xs font-bold text-slate-700 block mb-1">
                       Kết thúc thuê
                     </span>
                     <DateTime24hPicker
@@ -384,10 +371,10 @@ export default function HomePage() {
                     whileTap={{ scale: 0.95 }}
                     transition={{ type: "spring", stiffness: 400, damping: 17 }}
                     disabled={isLoading}
-                    className="h-11 sm:h-12 px-6 rounded-xl sm:rounded-full bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs gap-2 shrink-0 shadow-md shadow-blue-600/25 transition-colors flex items-center justify-center cursor-pointer disabled:opacity-50"
+                    className="h-11 sm:h-12 px-6 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs gap-2 shrink-0 shadow-md shadow-blue-600/25 transition-colors flex items-center justify-center cursor-pointer disabled:opacity-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:ring-offset-2"
                   >
                     <Search className="h-4 w-4" />
-                    <span className="sm:inline">Tìm xe ngay</span>
+                    <span className="sm:inline">Tìm kiếm xe</span>
                   </motion.button>
                 </form>
 
@@ -400,7 +387,7 @@ export default function HomePage() {
                     whileTap={{ scale: 0.95 }}
                     transition={{ type: "spring", stiffness: 400, damping: 17 }}
                     onClick={() => setVehicleType(undefined)}
-                    className={`px-3.5 py-1.5 rounded-full text-xs font-semibold cursor-pointer transition-colors ${
+                    className={`px-3.5 py-1.5 rounded-full text-xs font-semibold cursor-pointer transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:ring-offset-1 ${
                       vehicleType === undefined
                         ? "bg-slate-900 text-white shadow-xs"
                         : "bg-slate-100 text-slate-600 hover:bg-slate-200"
@@ -421,7 +408,7 @@ export default function HomePage() {
                       whileTap={{ scale: 0.95 }}
                       transition={{ type: "spring", stiffness: 400, damping: 17 }}
                       onClick={() => setVehicleType(item.type)}
-                      className={`px-3.5 py-1.5 rounded-full text-xs font-semibold cursor-pointer transition-colors ${
+                      className={`px-3.5 py-1.5 rounded-full text-xs font-semibold cursor-pointer transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:ring-offset-1 ${
                         vehicleType === item.type
                           ? "bg-slate-900 text-white shadow-xs"
                           : "bg-slate-100 text-slate-600 hover:bg-slate-200"
@@ -493,7 +480,7 @@ export default function HomePage() {
           <div id="vehicle-catalog-grid">
           {/* Cards Grid with Scroll Reveal */}
           {displayedVehicles.length === 0 ? (
-            <div className="text-center py-20 bg-white rounded-3xl border border-slate-200 p-8 shadow-xs">
+            <div className="text-center py-20 bg-white rounded-2xl border border-slate-200 p-8 shadow-xs">
               <Bike className="h-12 w-12 text-slate-300 mx-auto mb-3" />
               <h3 className="text-base font-bold text-slate-800">
                 Không tìm thấy xe phù hợp trong khung giờ này
@@ -503,13 +490,7 @@ export default function HomePage() {
               </p>
             </div>
           ) : (
-            <motion.div
-              key={vehicleType === undefined ? "all" : String(vehicleType)}
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.25 }}
-              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6"
-            >
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
               {displayedVehicles.map((v) => {
                 const available = v.availableCount !== undefined ? v.availableCount : 3;
                 const isOutOfStock = available <= 0;
@@ -531,9 +512,8 @@ export default function HomePage() {
                     href={`/vehicles/${v.id}`}
                     className="block h-full group outline-none"
                   >
-                    <motion.div
-                      whileHover={{ y: -6, transition: { duration: 0.2 } }}
-                      className="h-full bg-white rounded-3xl border border-slate-200/80 shadow-xs hover:shadow-card-hover hover:border-blue-500/50 transition-all duration-300 flex flex-col justify-between overflow-hidden cursor-pointer"
+                    <div
+                      className="h-full bg-white rounded-2xl border border-slate-200/90 shadow-xs hover:shadow-card-hover hover:border-blue-500/50 transition-all duration-200 flex flex-col justify-between overflow-hidden cursor-pointer"
                     >
                       <div>
                         {/* Vehicle Image Container */}
@@ -544,7 +524,7 @@ export default function HomePage() {
                                 ? v.images[0]
                                 : DEFAULT_VEHICLE_IMG
                             }
-                            alt={v.name}
+                            alt={`Dòng xe ${v.brand ? v.brand + " " : ""}${v.name || "cho thuê tự lái"} tại ${v.store?.storeName || "nhà xe đối tác"}`}
                             onError={(e) => {
                               (e.target as HTMLImageElement).src = DEFAULT_VEHICLE_IMG;
                             }}
@@ -561,44 +541,42 @@ export default function HomePage() {
                             </span>
                           </div>
 
-                          {/* Favorite button with spring click */}
-                          <motion.button
+                          {/* Favorite button */}
+                          <button
                             type="button"
-                            whileHover={{ scale: 1.15 }}
-                            whileTap={{ scale: 0.85 }}
+                            aria-label={isFav ? "Xóa khỏi danh sách xe yêu thích" : "Lưu vào danh sách xe yêu thích"}
                             onClick={(e) => {
                               e.preventDefault();
                               e.stopPropagation();
                               toggleFavorite(v.id);
                             }}
-                            className="absolute top-3 right-3 h-8 w-8 rounded-full bg-white/90 hover:bg-white text-slate-700 hover:text-red-500 flex items-center justify-center shadow-xs transition-colors z-10 cursor-pointer"
+                            className="absolute top-3 right-3 h-8 w-8 rounded-full bg-white/90 hover:bg-white text-slate-700 hover:text-red-500 hover:scale-110 active:scale-95 flex items-center justify-center shadow-xs transition-all z-10 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-500"
                           >
                             <Heart
                               className={`h-4 w-4 ${
                                 isFav ? "fill-red-500 text-red-500" : ""
                               }`}
                             />
-                          </motion.button>
+                          </button>
 
                           {/* Compare toggle button */}
-                          <motion.button
+                          <button
                             type="button"
-                            whileHover={{ scale: 1.15 }}
-                            whileTap={{ scale: 0.85 }}
+                            aria-label={isCompared ? "Hủy chọn so sánh dòng xe này" : "Thêm dòng xe vào bảng so sánh"}
                             onClick={(e) => {
                               e.preventDefault();
                               e.stopPropagation();
                               toggleCompare(v);
                             }}
                             title={isCompared ? "Đang chọn so sánh (bấm để hủy)" : "Thêm vào bảng so sánh"}
-                            className={`absolute top-3 right-12 h-8 w-8 rounded-full flex items-center justify-center shadow-xs transition-all z-10 cursor-pointer ${
+                            className={`absolute top-3 right-12 h-8 w-8 rounded-full flex items-center justify-center shadow-xs transition-all z-10 cursor-pointer hover:scale-110 active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-600 ${
                               isCompared
                                 ? "bg-blue-600 text-white font-bold ring-2 ring-blue-300 shadow-xs"
                                 : "bg-white/90 hover:bg-white text-slate-700 hover:text-blue-600"
                             }`}
                           >
                             <Scale className="h-4 w-4" />
-                          </motion.button>
+                          </button>
 
                           {/* Availability Pill */}
                           <div className="absolute bottom-3 left-3">
@@ -671,15 +649,15 @@ export default function HomePage() {
                         </div>
 
                         <div className="flex items-center gap-1 text-xs font-bold text-blue-600 group-hover:translate-x-1 transition-transform">
-                          <span>Xem chi tiết & Đặt</span>
+                          <span>Xem chi tiết xe</span>
                           <span className="text-sm font-black">→</span>
                         </div>
                       </div>
-                    </motion.div>
+                    </div>
                   </Link>
                 );
               })}
-            </motion.div>
+            </div>
           )}
           </div>
         </div>
@@ -688,28 +666,27 @@ export default function HomePage() {
       {/* ─── Pricing & Promos Section (#pricing) ─── */}
       <section id="pricing" className="py-16 bg-slate-50 border-t border-slate-200/80 scroll-mt-20">
         <div className="container max-w-6xl mx-auto px-4 sm:px-6">
-          <div className="text-center max-w-2xl mx-auto mb-12">
-            <span className="text-xs font-black tracking-widest text-blue-600 uppercase bg-blue-100/70 px-3 py-1 rounded-full">
-              Ưu đãi độc quyền
-            </span>
-            <h2 className="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight mt-3">
-              Bảng Giá Thuê & Ưu Đãi Đặc Quyền
-            </h2>
-            <p className="text-xs sm:text-sm text-slate-500 mt-2 leading-relaxed">
-              Mức giá niêm yết rõ ràng, không phí ẩn. Giảm sâu khi thuê dài ngày cùng nhiều gói bảo hiểm hỗ trợ.
-            </p>
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-10 pb-4 border-b border-slate-200/70">
+            <div>
+              <h2 className="text-2xl sm:text-3xl font-black text-slate-950 tracking-tight">
+                Biểu phí niêm yết & Gói ưu đãi hành trình
+              </h2>
+              <p className="text-xs sm:text-sm text-slate-500 mt-1.5 leading-relaxed max-w-xl">
+                Giá niêm yết minh bạch theo ngày, tự động áp mã giảm giá cho lịch trình từ 3 ngày trở lên và hỗ trợ giao nhận tận nơi.
+              </p>
+            </div>
+            <div className="text-xs text-slate-400 font-medium shrink-0">
+              Cập nhật biểu phí theo đối tác xác thực
+            </div>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {/* Promo 1: Khách hàng mới */}
-            <div className="bg-white rounded-3xl p-6 border border-slate-200/80 shadow-xs hover:shadow-md transition-shadow relative overflow-hidden group">
+            <div className="bg-white rounded-2xl p-6 border border-slate-200/80 shadow-xs hover:shadow-md transition-shadow relative overflow-hidden group">
               <div className="absolute top-0 right-0 bg-blue-600 text-white font-extrabold text-[10px] uppercase tracking-wider py-1 px-4 rounded-bl-2xl">
-                Mới
+                Tân thủ
               </div>
-              <div className="text-xs font-bold text-blue-600 uppercase tracking-wider mb-2">
-                Dành cho tân thủ
-              </div>
-              <h3 className="text-xl font-black text-slate-900">Giảm 10% Chuyến Đầu</h3>
+              <h3 className="text-xl font-black text-slate-900 mt-1">Giảm 10% Chuyến Đầu</h3>
               <p className="text-xs text-slate-500 mt-2">
                 Nhập mã ưu đãi khi xác nhận thanh toán đặt cọc cho mọi dòng xe trên hệ thống.
               </p>
@@ -730,20 +707,17 @@ export default function HomePage() {
             </div>
 
             {/* Promo 2: Thuê theo tuần / Tháng */}
-            <div className="bg-white rounded-3xl p-6 border-2 border-blue-600 shadow-lg shadow-blue-500/10 relative overflow-hidden group">
-              <div className="absolute top-0 right-0 bg-gradient-to-l from-blue-600 to-indigo-600 text-white font-extrabold text-[10px] uppercase tracking-wider py-1 px-4 rounded-bl-2xl">
-                Phổ biến nhất
+            <div className="bg-white rounded-2xl p-6 border-2 border-blue-600 shadow-lg shadow-blue-500/10 relative overflow-hidden group">
+              <div className="absolute top-0 right-0 bg-blue-600 text-white font-extrabold text-[10px] uppercase tracking-wider py-1 px-4 rounded-bl-2xl">
+                Gói phổ biến
               </div>
-              <div className="text-xs font-bold text-indigo-600 uppercase tracking-wider mb-2">
-                Thuê dài ngày
-              </div>
-              <h3 className="text-xl font-black text-slate-900">Giảm 15% - 25%</h3>
+              <h3 className="text-xl font-black text-slate-900 mt-1">Giảm 15% - 25% Thuê Dài Ngày</h3>
               <p className="text-xs text-slate-500 mt-2">
                 Ưu đãi giảm trực tiếp theo ngày cho các chuyến du lịch, công tác từ 3 ngày trở lên.
               </p>
-              <div className="mt-5 p-3 rounded-2xl bg-indigo-50/60 border border-dashed border-indigo-200 flex items-center justify-between">
-                <span className="font-mono font-black text-sm text-indigo-700">VIETNAMROAD</span>
-                <span className="text-[11px] font-bold text-indigo-600 bg-indigo-100/80 px-2 py-0.5 rounded-lg">Tự động áp</span>
+              <div className="mt-5 p-3 rounded-2xl bg-blue-50/60 border border-dashed border-blue-200 flex items-center justify-between">
+                <span className="font-mono font-black text-sm text-blue-700">VIETNAMROAD</span>
+                <span className="text-[11px] font-bold text-blue-600 bg-blue-100/80 px-2 py-0.5 rounded-lg">Tự động áp</span>
               </div>
               <ul className="mt-5 space-y-2 text-xs text-slate-600">
                 <li className="flex items-center gap-2">
@@ -758,11 +732,11 @@ export default function HomePage() {
             </div>
 
             {/* Promo 3: Miễn phí giao nhận */}
-            <div className="bg-white rounded-3xl p-6 border border-slate-200/80 shadow-xs hover:shadow-md transition-shadow relative overflow-hidden group">
-              <div className="text-xs font-bold text-amber-600 uppercase tracking-wider mb-2">
-                Tiện ích tận nơi
+            <div className="bg-white rounded-2xl p-6 border border-slate-200/80 shadow-xs hover:shadow-md transition-shadow relative overflow-hidden group">
+              <div className="absolute top-0 right-0 bg-amber-500 text-white font-extrabold text-[10px] uppercase tracking-wider py-1 px-4 rounded-bl-2xl">
+                Tiện ích
               </div>
-              <h3 className="text-xl font-black text-slate-900">Giao Xe Tận Khách Sạn</h3>
+              <h3 className="text-xl font-black text-slate-900 mt-1">Giao Xe Tận Khách Sạn & Sân Bay</h3>
               <p className="text-xs text-slate-500 mt-2">
                 Đối tác liên kết hỗ trợ bàn giao và nhận lại xe tận nơi trong bán kính nội thành.
               </p>
@@ -798,47 +772,144 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ─── Experience & Values Section (Why Rent from Us like Mioto / #about) ─── */}
-      <section id="about" className="py-16 bg-white border-t border-slate-100 scroll-mt-20">
-        <div className="container max-w-6xl mx-auto px-4 sm:px-6">
-          <div className="text-center max-w-2xl mx-auto mb-12">
-            <h2 className="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight">
-              Hành trình trọn vẹn, an tâm tuyệt đối
-            </h2>
-            <p className="text-xs sm:text-sm text-slate-500 mt-1.5 leading-relaxed">
-              VehicleRent kết nối bạn với những chủ xe tận tâm, mang lại trải nghiệm di chuyển tự do và thuận tiện nhất.
-            </p>
+      {/* ─── Experience & Values Section (Asymmetric Bento Grid) ─── */}
+      <section id="about" className="py-20 bg-slate-50/70 border-t border-slate-200/80 scroll-mt-20">
+        <div className="container max-w-7xl mx-auto px-4 sm:px-6">
+          {/* Asymmetric Header */}
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
+            <div className="max-w-2xl">
+              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-black text-slate-950 tracking-tight leading-tight">
+                Tiêu chuẩn vận hành minh bạch cho từng chuyến đi
+              </h2>
+              <p className="text-xs sm:text-sm text-slate-600 mt-2 leading-relaxed">
+                Nền tảng công nghệ kết nối trực tiếp với đối tác nhà xe uy tín, kiểm soát chất lượng từ khâu chọn biển số đến khi hoàn tất bàn giao thực tế.
+              </p>
+            </div>
+            <div className="text-xs text-slate-500 font-medium shrink-0 flex items-center gap-2 bg-white px-3.5 py-1.5 rounded-full border border-slate-200 shadow-xs">
+              <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+              <span>Quy trình kiểm tra 6 điểm kỹ thuật số</span>
+            </div>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="p-6 rounded-3xl bg-slate-50/70 border border-slate-100 space-y-3">
-              <div className="h-12 w-12 rounded-2xl bg-blue-50 text-blue-600 flex items-center justify-center font-bold">
-                <Compass className="h-6 w-6" />
+          {/* Asymmetric Bento Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-12 gap-6">
+            {/* Bento Card 1: 7 cols - Biển số thực tế & 6 điểm kiểm tra */}
+            <div className="md:col-span-7 bg-white rounded-2xl p-7 border border-slate-200/90 shadow-xs hover:shadow-md transition-shadow flex flex-col justify-between space-y-6">
+              <div className="space-y-3">
+                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-xl bg-blue-50 text-blue-700 text-xs font-bold border border-blue-100">
+                  <ShieldCheck className="h-4 w-4 text-blue-600" />
+                  <span>Cam kết biển số thực tế</span>
+                </div>
+                <h3 className="text-xl sm:text-2xl font-black text-slate-950 tracking-tight">
+                  Nhận đúng dòng xe & biển số đã xác nhận
+                </h3>
+                <p className="text-xs sm:text-sm text-slate-600 leading-relaxed max-w-xl">
+                  Loại bỏ tình trạng chỉ chọn dòng xe chung chung. Mỗi đơn thuê trên VehicleRent đều gắn liền với biển số thực tế và được đối soát 6 điểm kỹ thuật số lưu biên bản điện tử trực tiếp trên hệ thống.
+                </p>
               </div>
-              <h3 className="font-extrabold text-base text-slate-900">Nhận xe linh hoạt</h3>
-              <p className="text-xs text-slate-500 leading-relaxed">
-                Chọn nhận xe tại địa chỉ nhà xe hoặc yêu cầu giao xe tận nơi đến khách sạn, nhà ga, sân bay theo lịch trình của bạn.
-              </p>
+
+              {/* 6-point digital checklist */}
+              <div className="grid grid-cols-2 sm:grid-cols-3 gap-2.5 pt-2 border-t border-slate-100 text-xs">
+                <div className="flex items-center gap-1.5 text-slate-700 bg-slate-50 p-2.5 rounded-xl border border-slate-100">
+                  <CheckCircle2 className="h-3.5 w-3.5 text-emerald-600 shrink-0" />
+                  <span className="font-medium text-[11px]">Đèn & Xi nhan</span>
+                </div>
+                <div className="flex items-center gap-1.5 text-slate-700 bg-slate-50 p-2.5 rounded-xl border border-slate-100">
+                  <CheckCircle2 className="h-3.5 w-3.5 text-emerald-600 shrink-0" />
+                  <span className="font-medium text-[11px]">Hệ thống phanh</span>
+                </div>
+                <div className="flex items-center gap-1.5 text-slate-700 bg-slate-50 p-2.5 rounded-xl border border-slate-100">
+                  <CheckCircle2 className="h-3.5 w-3.5 text-emerald-600 shrink-0" />
+                  <span className="font-medium text-[11px]">Lốp xe & Áp suất</span>
+                </div>
+                <div className="flex items-center gap-1.5 text-slate-700 bg-slate-50 p-2.5 rounded-xl border border-slate-100">
+                  <CheckCircle2 className="h-3.5 w-3.5 text-emerald-600 shrink-0" />
+                  <span className="font-medium text-[11px]">Gương chiếu hậu</span>
+                </div>
+                <div className="flex items-center gap-1.5 text-slate-700 bg-slate-50 p-2.5 rounded-xl border border-slate-100">
+                  <CheckCircle2 className="h-3.5 w-3.5 text-emerald-600 shrink-0" />
+                  <span className="font-medium text-[11px]">Vạch xăng hiện trạng</span>
+                </div>
+                <div className="flex items-center gap-1.5 text-slate-700 bg-slate-50 p-2.5 rounded-xl border border-slate-100">
+                  <CheckCircle2 className="h-3.5 w-3.5 text-emerald-600 shrink-0" />
+                  <span className="font-medium text-[11px]">Ảnh chụp trầy xước</span>
+                </div>
+              </div>
             </div>
 
-            <div className="p-6 rounded-3xl bg-slate-50/70 border border-slate-100 space-y-3">
-              <div className="h-12 w-12 rounded-2xl bg-emerald-50 text-emerald-600 flex items-center justify-center font-bold">
-                <ShieldCheck className="h-6 w-6" />
+            {/* Bento Card 2: 5 cols - Khóa xe 10 phút & Webhook PayOS */}
+            <div className="md:col-span-5 bg-gradient-to-br from-slate-900 via-slate-900 to-blue-950 text-white rounded-2xl p-7 shadow-xs flex flex-col justify-between space-y-6">
+              <div className="space-y-3">
+                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-xl bg-blue-500/20 text-cyan-300 text-xs font-bold border border-cyan-400/30">
+                  <Clock className="h-4 w-4 text-cyan-400" />
+                  <span>Khóa xe 10 phút chống xung đột</span>
+                </div>
+                <h3 className="text-xl sm:text-2xl font-black text-white tracking-tight">
+                  VietQR tức thời, không lo trùng lịch
+                </h3>
+                <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
+                  Cơ chế khóa chỗ độc quyền 10 phút bảo vệ lượt đặt của bạn. Thanh toán cọc tự động qua chuẩn Napas247 PayOS, hệ thống tự động giải phóng vị trí nếu quá hạn mà không phát sinh bất kỳ rủi ro nào.
+                </p>
               </div>
-              <h3 className="font-extrabold text-base text-slate-900">Xe thực tế, đúng biển số</h3>
-              <p className="text-xs text-slate-500 leading-relaxed">
-                Mọi phương tiện đều được kiểm tra trước khi bàn giao. Khách hàng nhận đúng dòng xe và biển số đã xác nhận trong đơn.
-              </p>
+
+              <div className="p-3.5 rounded-2xl bg-slate-800/90 border border-slate-700 flex items-center justify-between text-xs">
+                <div className="flex items-center gap-2">
+                  <ShieldCheck className="h-4 w-4 text-emerald-400 shrink-0" />
+                  <span className="text-slate-200 font-semibold">Tự động hoàn cọc theo quy chế</span>
+                </div>
+                <span className="text-cyan-300 font-bold text-[11px] bg-cyan-950/60 px-2 py-0.5 rounded-lg border border-cyan-500/30">0% phụ phí ẩn</span>
+              </div>
             </div>
 
-            <div className="p-6 rounded-3xl bg-slate-50/70 border border-slate-100 space-y-3">
-              <div className="h-12 w-12 rounded-2xl bg-amber-50 text-amber-600 flex items-center justify-center font-bold">
-                <Zap className="h-6 w-6" />
+            {/* Bento Card 3: 5 cols - Nhận xe tận nơi */}
+            <div className="md:col-span-5 bg-white rounded-2xl p-7 border border-slate-200/90 shadow-xs hover:shadow-md transition-shadow flex flex-col justify-between space-y-6">
+              <div className="space-y-3">
+                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-xl bg-emerald-50 text-emerald-700 text-xs font-bold border border-emerald-100">
+                  <Compass className="h-4 w-4 text-emerald-600" />
+                  <span>Tiện ích giao nhận</span>
+                </div>
+                <h3 className="text-xl sm:text-2xl font-black text-slate-950 tracking-tight">
+                  Giao xe tận sảnh khách sạn & sân bay
+                </h3>
+                <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
+                  Linh hoạt lựa chọn: nhận trực tiếp tại showroom đối tác hoặc yêu cầu giao xe tận nơi theo giờ hẹn. Tặng kèm mũ bảo hiểm đạt chuẩn và áo mưa dự phòng cho mọi chuyến đi.
+                </p>
               </div>
-              <h3 className="font-extrabold text-base text-slate-900">Thanh toán minh bạch</h3>
-              <p className="text-xs text-slate-500 leading-relaxed">
-                Cọc trước nhanh chóng qua chuyển khoản ngân hàng, không lo phát sinh phụ phí ẩn, hoàn cọc nhanh chóng khi đổi kế hoạch.
-              </p>
+
+              <div className="flex flex-wrap items-center gap-2 text-xs text-slate-500 pt-2 border-t border-slate-100">
+                <span className="bg-slate-100 px-2.5 py-1 rounded-lg font-semibold text-slate-700">Miễn phí giao &lt; 5km</span>
+                <span className="bg-slate-100 px-2.5 py-1 rounded-lg font-semibold text-slate-700">Giao đúng giờ hẹn</span>
+              </div>
+            </div>
+
+            {/* Bento Card 4: 7 cols - Pháp lý & Hotline */}
+            <div className="md:col-span-7 bg-white rounded-2xl p-7 border border-slate-200/90 shadow-xs hover:shadow-md transition-shadow flex flex-col justify-between space-y-6">
+              <div className="space-y-3">
+                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-xl bg-amber-50 text-amber-700 text-xs font-bold border border-amber-200">
+                  <Scale className="h-4 w-4 text-amber-600" />
+                  <span>Quy định pháp lý minh bạch</span>
+                </div>
+                <h3 className="text-xl sm:text-2xl font-black text-slate-950 tracking-tight">
+                  Rõ ràng phạt nguội, an tâm di chuyển
+                </h3>
+                <p className="text-xs sm:text-sm text-slate-600 leading-relaxed max-w-xl">
+                  Chính sách trách nhiệm vi phạm giao thông (phạt nguội) và điều kiện hoàn hủy cọc được niêm yết công khai. Đội ngũ quản lý vận hành hỗ trợ xử lý sự cố phát sinh 24/7 trong suốt hành trình.
+                </p>
+              </div>
+
+              <div className="flex flex-wrap items-center justify-between gap-3 pt-3 border-t border-slate-100 text-xs">
+                <div className="flex items-center gap-3">
+                  <Link href="/terms" className="font-bold text-blue-600 hover:underline">
+                    Quy định phạt nguội →
+                  </Link>
+                  <Link href="/refund" className="font-bold text-blue-600 hover:underline">
+                    Chính sách hoàn cọc →
+                  </Link>
+                </div>
+                <div className="text-slate-500 text-[11px]">
+                  Hotline hỗ trợ: <a href="tel:0384340974" className="text-slate-900 font-bold hover:underline">0384 340 974</a>
+                </div>
+              </div>
             </div>
           </div>
         </div>

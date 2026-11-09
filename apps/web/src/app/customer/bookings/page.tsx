@@ -238,14 +238,11 @@ export default function CustomerBookingsPage() {
         {/* Header */}
         <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-8 gap-4">
           <div>
-            <div className="text-xs font-bold uppercase tracking-wider text-blue-600">
-              Khách hàng
-            </div>
             <h1 className="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight">
               Lịch Sử Đơn Thuê Xe
             </h1>
-            <p className="text-xs text-slate-500 mt-1">
-              Theo dõi tình trạng đơn đặt chỗ, thanh toán cọc VietQR và đánh giá dịch vụ sau khi trả xe.
+            <p className="text-xs sm:text-sm text-slate-500 mt-1">
+              Theo dõi tình trạng đơn đặt chỗ, thanh toán cọc VietQR và biên bản bàn giao xe thực tế.
             </p>
           </div>
           <Link href="/">
@@ -329,7 +326,7 @@ export default function CustomerBookingsPage() {
             <p className="text-xs font-semibold">Đang tải lịch sử đơn thuê...</p>
           </div>
         ) : filteredBookings.length === 0 ? (
-          <Card className="text-center py-16 rounded-3xl border shadow-xs p-8 bg-white">
+          <Card className="text-center py-16 rounded-2xl border shadow-xs p-8 bg-white">
             <Bike className="h-12 w-12 text-slate-300 mx-auto mb-3" />
             <h3 className="text-base font-bold text-slate-800">
               {bookings.length === 0 ? "Chưa có đơn thuê nào" : "Không tìm thấy đơn thuê nào phù hợp"}
@@ -341,7 +338,7 @@ export default function CustomerBookingsPage() {
             </p>
             {bookings.length === 0 && (
               <Link href="/" className="inline-block mt-4">
-                <Button size="sm" className="bg-blue-600 hover:bg-blue-700 text-xs">
+                <Button size="sm" className="bg-blue-600 hover:bg-blue-700 text-xs rounded-xl font-bold">
                   Tìm xe ngay
                 </Button>
               </Link>
@@ -433,14 +430,14 @@ export default function CustomerBookingsPage() {
                               onClick={() => handleCancelBooking(b.id)}
                               className="text-xs text-red-600 hover:text-red-700 border-red-200 hover:bg-red-50 h-8 rounded-lg"
                             >
-                              Hủy đơn
+                              Hủy đơn đặt xe
                             </Button>
                             <Button
                               size="sm"
                               onClick={() => handleOpenQr(b)}
                               className="bg-amber-600 hover:bg-amber-700 text-white text-xs h-8 rounded-lg gap-1.5"
                             >
-                              <QrCode className="h-3.5 w-3.5" /> Quét VietQR cọc
+                              <QrCode className="h-3.5 w-3.5" /> Thanh toán cọc VietQR
                             </Button>
                           </>
                         )}
@@ -485,7 +482,7 @@ export default function CustomerBookingsPage() {
                               }}
                               className="text-xs border-amber-300 bg-amber-50/50 text-amber-900 hover:bg-amber-100 h-8 rounded-lg gap-1.5 shadow-2xs"
                             >
-                              <Star className="h-3.5 w-3.5 text-amber-500 fill-amber-400" /> Viết đánh giá
+                              <Star className="h-3.5 w-3.5 text-amber-500 fill-amber-400" /> Viết đánh giá chuyến đi
                             </Button>
                           )
                         )}
@@ -513,7 +510,7 @@ export default function CustomerBookingsPage() {
             <div className="py-4 flex flex-col items-center">
               <div className="w-56 h-56 bg-slate-50 border rounded-2xl p-2 flex items-center justify-center">
                 {qrData?.qrCode ? (
-                  <img src={qrData.qrCode} alt="VietQR" className="w-full h-full object-contain" />
+                  <img src={qrData.qrCode} alt="Mã QR PayOS thanh toán cọc đơn thuê xe" className="w-full h-full object-contain" />
                 ) : (
                   <QrCode className="h-20 w-20 text-slate-300 animate-pulse" />
                 )}

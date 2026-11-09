@@ -17,7 +17,6 @@ import {
   Clock,
   AlertTriangle,
   ArrowRight,
-  Sparkles,
   BarChart3,
   PieChart as PieChartIcon,
   Calendar,
@@ -294,10 +293,7 @@ export default function AdminDashboardPage() {
         {/* Header */}
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div>
-            <div className="text-xs font-bold uppercase tracking-wider text-red-600 flex items-center gap-1.5">
-              <Shield className="h-4 w-4" /> Ban Quản Trị Hệ Thống Sàn
-            </div>
-            <h1 className="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight mt-1">
+            <h1 className="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight">
               Báo Cáo & Trung Tâm Điều Hành Sàn
             </h1>
             <p className="text-xs sm:text-sm text-slate-500 mt-1">
@@ -341,7 +337,7 @@ export default function AdminDashboardPage() {
 
         {/* Priority Pending Payout Requests Alert (Requirement 1) */}
         {pendingPayouts.length > 0 && (
-          <div className="rounded-3xl border-2 border-emerald-300 bg-gradient-to-r from-emerald-50 via-teal-50 to-emerald-100/70 p-5 shadow-xs text-emerald-950 space-y-3">
+          <div className="rounded-2xl border-2 border-emerald-300 bg-gradient-to-r from-emerald-50 via-teal-50 to-emerald-100/70 p-5 shadow-xs text-emerald-950 space-y-3">
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
               <div className="flex items-center gap-3">
                 <div className="h-11 w-11 rounded-2xl bg-emerald-600 text-white flex items-center justify-center shrink-0 shadow-xs">
@@ -433,7 +429,7 @@ export default function AdminDashboardPage() {
 
         {/* Pending Moderation Alert */}
         {pendingStoresCount > 0 && (
-          <div className="rounded-3xl border border-amber-300 bg-amber-50/90 p-4 sm:p-5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 text-amber-950 shadow-xs">
+          <div className="rounded-2xl border border-amber-300 bg-amber-50/90 p-4 sm:p-5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 text-amber-950 shadow-xs">
             <div className="flex items-center gap-3">
               <div className="h-10 w-10 rounded-2xl bg-amber-500/20 text-amber-800 flex items-center justify-center shrink-0">
                 <Clock className="h-5 w-5" />
@@ -457,7 +453,7 @@ export default function AdminDashboardPage() {
 
         {/* Top Metric Cards */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-          <Card className="rounded-3xl border-slate-200/80 shadow-xs bg-white p-5 space-y-3">
+          <Card className="rounded-2xl border-slate-200/80 shadow-xs bg-white p-5 space-y-3">
             <div className="flex items-center justify-between">
               <span className="text-xs font-bold text-slate-500">Tổng doanh thu toàn sàn</span>
               <div className="h-8 w-8 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center">
@@ -475,7 +471,7 @@ export default function AdminDashboardPage() {
             </div>
           </Card>
 
-          <Card className="rounded-3xl border-slate-200/80 shadow-xs bg-white p-5 space-y-3">
+          <Card className="rounded-2xl border-slate-200/80 shadow-xs bg-white p-5 space-y-3">
             <div className="flex items-center justify-between">
               <span className="text-xs font-bold text-slate-500">Hoa hồng sàn thực thu ({commissionRate}%)</span>
               <div className="h-8 w-8 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center">
@@ -493,7 +489,7 @@ export default function AdminDashboardPage() {
             </div>
           </Card>
 
-          <Card className="rounded-3xl border-slate-200/80 shadow-xs bg-white p-5 space-y-3">
+          <Card className="rounded-2xl border-slate-200/80 shadow-xs bg-white p-5 space-y-3">
             <div className="flex items-center justify-between">
               <span className="text-xs font-bold text-slate-500">Hệ thống Cửa hàng</span>
               <div className="h-8 w-8 rounded-xl bg-amber-50 text-amber-600 flex items-center justify-center">
@@ -513,7 +509,7 @@ export default function AdminDashboardPage() {
             </div>
           </Card>
 
-          <Card className="rounded-3xl border-slate-200/80 shadow-xs bg-white p-5 space-y-3">
+          <Card className="rounded-2xl border-slate-200/80 shadow-xs bg-white p-5 space-y-3">
             <div className="flex items-center justify-between">
               <span className="text-xs font-bold text-slate-500">Tổng xe sẵn sàng bàn giao</span>
               <div className="h-8 w-8 rounded-xl bg-indigo-50 text-indigo-600 flex items-center justify-center">
@@ -535,7 +531,7 @@ export default function AdminDashboardPage() {
         {/* ─── Visual Charts Section ─── */}
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
           {/* Chart 1: Revenue & Commission Trend (Area Chart - 2 Cols) */}
-          <Card className="lg:col-span-2 rounded-3xl border-slate-200/80 shadow-xs bg-white p-6 space-y-4">
+          <Card className="lg:col-span-2 rounded-2xl border-slate-200/80 shadow-xs bg-white p-6 space-y-4">
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-2 border-b">
               <div>
                 <CardTitle className="text-base font-extrabold text-slate-900 flex items-center gap-2">
@@ -654,7 +650,7 @@ export default function AdminDashboardPage() {
           </Card>
 
           {/* Chart 2: Booking Status Breakdown (Donut Chart - 1 Col) */}
-          <Card className="rounded-3xl border-slate-200/80 shadow-xs bg-white p-6 space-y-4">
+          <Card className="rounded-2xl border-slate-200/80 shadow-xs bg-white p-6 space-y-4">
             <div className="pb-2 border-b">
               <CardTitle className="text-base font-extrabold text-slate-900 flex items-center gap-2">
                 <PieChartIcon className="h-5 w-5 text-indigo-600" />
@@ -729,7 +725,7 @@ export default function AdminDashboardPage() {
 
         {/* Chart 3: Vehicle Type & Inventory Demand (Bar Chart) */}
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-          <Card className="lg:col-span-2 rounded-3xl border-slate-200/80 shadow-xs bg-white p-6 space-y-4">
+          <Card className="lg:col-span-2 rounded-2xl border-slate-200/80 shadow-xs bg-white p-6 space-y-4">
             <div className="pb-2 border-b flex items-center justify-between">
               <div>
                 <CardTitle className="text-base font-extrabold text-slate-900 flex items-center gap-2">
@@ -788,7 +784,7 @@ export default function AdminDashboardPage() {
 
           {/* Quick Management Shortcuts */}
           <div className="space-y-4 flex flex-col justify-between">
-            <Card className="rounded-3xl border-slate-200/80 shadow-xs bg-white p-5 hover:shadow-md transition-shadow">
+            <Card className="rounded-2xl border-slate-200/80 shadow-xs bg-white p-5 hover:shadow-md transition-shadow">
               <div className="flex items-center gap-3 mb-2">
                 <div className="h-9 w-9 rounded-xl bg-amber-50 text-amber-700 flex items-center justify-center font-bold">
                   <StoreIcon className="h-5 w-5" />
@@ -806,7 +802,7 @@ export default function AdminDashboardPage() {
               </Link>
             </Card>
 
-            <Card className="rounded-3xl border-slate-200/80 shadow-xs bg-white p-5 hover:shadow-md transition-shadow">
+            <Card className="rounded-2xl border-slate-200/80 shadow-xs bg-white p-5 hover:shadow-md transition-shadow">
               <div className="flex items-center gap-3 mb-2">
                 <div className="h-9 w-9 rounded-xl bg-blue-50 text-blue-700 flex items-center justify-center font-bold">
                   <Users className="h-5 w-5" />
@@ -824,7 +820,7 @@ export default function AdminDashboardPage() {
               </Link>
             </Card>
 
-            <Card className="rounded-3xl border-slate-200/80 shadow-xs bg-white p-5 hover:shadow-md transition-shadow">
+            <Card className="rounded-2xl border-slate-200/80 shadow-xs bg-white p-5 hover:shadow-md transition-shadow">
               <div className="flex items-center gap-3 mb-2">
                 <div className="h-9 w-9 rounded-xl bg-red-50 text-red-700 flex items-center justify-center font-bold">
                   <Shield className="h-5 w-5" />
@@ -845,7 +841,7 @@ export default function AdminDashboardPage() {
         </div>
 
         {/* ─── CẤU HÌNH HỆ THỐNG SÀN (Requirement 2) ─── */}
-        <Card className="rounded-3xl border-slate-200/80 shadow-xs bg-white p-6 sm:p-8 space-y-6">
+        <Card className="rounded-2xl border-slate-200/80 shadow-xs bg-white p-6 sm:p-8 space-y-6">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b">
             <div>
               <div className="flex items-center gap-2">
@@ -933,7 +929,7 @@ export default function AdminDashboardPage() {
                 </div>
                 {commissionRate === 0 ? (
                   <div className="text-[11px] font-bold text-emerald-700 bg-emerald-50 p-2 rounded-xl border border-emerald-200 flex items-center gap-1">
-                    <Sparkles className="h-3.5 w-3.5 text-emerald-600 shrink-0" />
+                    <CheckCircle2 className="h-3.5 w-3.5 text-emerald-600 shrink-0" />
                     Đang kích hoạt: Miễn 100% hoa hồng sàn
                   </div>
                 ) : (
@@ -1097,7 +1093,7 @@ export default function AdminDashboardPage() {
         </Card>
 
         {/* ─── QUẢN LÝ YÊU CẦU RÚT TIỀN (Payout Management) ─── */}
-        <Card className="rounded-3xl border-slate-200/80 shadow-xs bg-white overflow-hidden">
+        <Card className="rounded-2xl border-slate-200/80 shadow-xs bg-white overflow-hidden">
           <CardHeader className="p-6 pb-4 border-b bg-slate-50/60 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
             <div>
               <CardTitle className="text-base font-black text-slate-900 flex items-center gap-2">

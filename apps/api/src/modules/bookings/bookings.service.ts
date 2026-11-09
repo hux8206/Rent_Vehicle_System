@@ -35,9 +35,13 @@ export class BookingsService {
       throw new BadRequestException('Thời gian trả xe phải sau thời gian nhận xe. Vui lòng chọn lại ngày trả xe.');
     }
 
-    return this.prisma.$transaction(async (tx) => {
-      // ── 1. Lấy thông tin dòng xe và cửa hàng ─────────────────────────────
-      const model = await tx.vehicleModel.findUnique({
+    return this.prisma.$transaction(
+      async (tx) => {
+        // Khóa bi quan (Pessimistic Row-level Lock): Chống race-condition khi nhiều khách cùng bấm đặt 1 xe
+        await tx.$executeRaw`SELECT id FROM vehicle_models WHERE id = ${modelId} FOR UPDATE`;
+
+        // ── 1. Lấy thông tin dòng xe và cửa hàng ─────────────────────────────
+        const model = await tx.vehicleModel.findUnique({
         where: { id: modelId },
         include: {
           store: {
@@ -236,6 +240,10 @@ export class BookingsService {
         holdExpiresAt,
         message: `Giữ chỗ thành công! Vui lòng thanh toán trong 10 phút. Mã GD: ${transactionRef}`,
       };
+    },
+    {
+      maxWait: 10000,
+      timeout: 20000,
     });
   }
 

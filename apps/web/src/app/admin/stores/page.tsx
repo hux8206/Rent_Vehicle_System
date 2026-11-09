@@ -164,9 +164,6 @@ export default function AdminStoresPage() {
         {/* Header */}
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div>
-            <div className="text-xs font-bold uppercase tracking-wider text-red-600">
-              Quản Trị Đối Tác
-            </div>
             <h1 className="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight">
               Kiểm Duyệt Cửa Hàng & Thông Tin Đối Tác
             </h1>
@@ -245,7 +242,7 @@ export default function AdminStoresPage() {
                 Đang tải danh sách cửa hàng...
               </div>
             ) : stores.length === 0 ? (
-              <Card className="text-center py-16 rounded-3xl border shadow-xs bg-white p-8">
+              <Card className="text-center py-16 rounded-2xl border shadow-xs bg-white p-8">
                 <StoreIcon className="h-10 w-10 text-slate-300 mx-auto mb-2" />
                 <h3 className="text-sm font-bold text-slate-800">Không có cửa hàng nào trong mục này</h3>
               </Card>
@@ -310,7 +307,7 @@ export default function AdminStoresPage() {
                                 s.storeImage ||
                                 "https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?w=800&q=80"
                               }
-                              alt="Store cover"
+                              alt={s.storeName ? `Mặt tiền cửa hàng ${s.storeName}` : "Mặt tiền cửa hàng đối tác"}
                               className="w-full h-full object-cover"
                             />
                           </div>
@@ -471,7 +468,7 @@ export default function AdminStoresPage() {
                 Đang tải danh sách yêu cầu thay đổi thông tin...
               </div>
             ) : updateRequests.length === 0 ? (
-              <Card className="text-center py-16 rounded-3xl border shadow-xs bg-white p-8">
+              <Card className="text-center py-16 rounded-2xl border shadow-xs bg-white p-8">
                 <FileEdit className="h-10 w-10 text-slate-300 mx-auto mb-2" />
                 <h3 className="text-sm font-bold text-slate-800">Không có yêu cầu cập nhật nào</h3>
                 <p className="text-xs text-slate-500 mt-1">Khi đối tác gửi thay đổi thông tin cửa hàng, hồ sơ sẽ hiển thị tại đây.</p>
@@ -702,7 +699,7 @@ export default function AdminStoresPage() {
                                             <div className="relative h-44 w-full rounded-xl overflow-hidden border border-slate-200 bg-slate-100">
                                               <img
                                                 src={item.oldVal}
-                                                alt="Ảnh cũ"
+                                                alt="Ảnh mặt tiền cửa hàng hiện tại"
                                                 className="w-full h-full object-cover"
                                               />
                                             </div>
@@ -716,7 +713,7 @@ export default function AdminStoresPage() {
                                           <div className="relative h-44 w-full rounded-xl overflow-hidden border-2 border-emerald-500 shadow-md bg-slate-100 group">
                                             <img
                                               src={item.newVal}
-                                              alt="Ảnh mặt tiền mới"
+                                              alt="Ảnh mặt tiền cửa hàng mới gửi duyệt"
                                               className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                                             />
                                             <div className="absolute bottom-2 right-2">

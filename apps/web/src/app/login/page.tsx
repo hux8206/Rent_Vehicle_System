@@ -96,7 +96,7 @@ function LoginForm() {
         <ArrowLeft className="h-4 w-4" /> Quay lại trang chủ
       </Link>
 
-      <Card className="rounded-3xl border-slate-200/90 shadow-xl overflow-hidden bg-white">
+      <Card className="rounded-2xl border-slate-200/90 shadow-xl overflow-hidden bg-white">
         <CardContent className="p-8 sm:p-10 space-y-6">
           {/* Header */}
           <div className="space-y-2">
@@ -202,7 +202,7 @@ function LoginForm() {
               disabled={isLoading}
               className="w-full h-11 rounded-2xl bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs gap-2 shadow-md shadow-blue-600/25 transition-all mt-2"
             >
-              {isLoading ? "Đang xử lý..." : "Đăng Nhập"}
+              {isLoading ? "Đang xác thực tài khoản..." : "Đăng nhập tài khoản"}
               <ArrowRight className="h-4 w-4" />
             </Button>
           </form>

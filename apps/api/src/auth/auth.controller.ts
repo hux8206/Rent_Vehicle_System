@@ -1,5 +1,6 @@
 import { Body, Controller, Delete, Get, Patch, Post, Param, ParseIntPipe, UseGuards, Request } from '@nestjs/common';
 import { ApiBearerAuth, ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
+import { Throttle } from '@nestjs/throttler';
 import { AuthService } from './auth.service';
 import { RegisterCustomerDto } from './dto/register-customer.dto';
 import { RegisterPartnerDto } from './dto/register-partner.dto';
@@ -36,6 +37,7 @@ export class AuthController {
     return this.authService.registerPartner(dto);
   }
 
+  @Throttle({ default: { limit: 10, ttl: 60000 } })
   @Post('login')
   @ApiOperation({ summary: 'Đăng nhập và nhận JWT token' })
   @ApiResponse({ status: 200, description: 'Đăng nhập thành công, trả về accessToken' })

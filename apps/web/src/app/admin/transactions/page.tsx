@@ -222,10 +222,7 @@ export default function AdminTransactionsPage() {
         {/* Header */}
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div>
-            <div className="text-xs font-bold uppercase tracking-wider text-red-600 flex items-center gap-1.5">
-              <Receipt className="h-4 w-4" /> Trung Tâm Tài Chính Sàn
-            </div>
-            <h1 className="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight mt-1">
+            <h1 className="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight">
               Quản Lý Giao Dịch & Dòng Tiền Toàn Sàn
             </h1>
             <p className="text-xs sm:text-sm text-slate-500 mt-1">
@@ -258,7 +255,7 @@ export default function AdminTransactionsPage() {
 
         {/* Priority Pending Payout Banner */}
         {pendingPayouts.length > 0 && (
-          <div className="rounded-3xl border border-amber-300 bg-amber-50/90 p-5 flex flex-col md:flex-row items-start md:items-center justify-between gap-4 text-amber-950 shadow-xs">
+          <div className="rounded-2xl border border-amber-300 bg-amber-50/90 p-5 flex flex-col md:flex-row items-start md:items-center justify-between gap-4 text-amber-950 shadow-xs">
             <div className="flex items-center gap-3">
               <div className="h-11 w-11 rounded-2xl bg-amber-500/20 text-amber-800 flex items-center justify-center shrink-0">
                 <ShieldAlert className="h-6 w-6" />
@@ -300,7 +297,7 @@ export default function AdminTransactionsPage() {
         {/* 4 Overview Metric Cards */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
           {/* Card 1 */}
-          <Card className="rounded-3xl border-slate-200/80 shadow-xs bg-white p-5 space-y-2">
+          <Card className="rounded-2xl border-slate-200/80 shadow-xs bg-white p-5 space-y-2">
             <div className="flex items-center justify-between">
               <span className="text-xs font-bold text-slate-500 uppercase tracking-wider">
                 Thu cọc qua PayOS
@@ -319,7 +316,7 @@ export default function AdminTransactionsPage() {
           </Card>
 
           {/* Card 2 */}
-          <Card className="rounded-3xl border-slate-200/80 shadow-xs bg-white p-5 space-y-2">
+          <Card className="rounded-2xl border-slate-200/80 shadow-xs bg-white p-5 space-y-2">
             <div className="flex items-center justify-between">
               <span className="text-xs font-bold text-slate-500 uppercase tracking-wider">
                 Rút tiền chờ duyệt
@@ -337,7 +334,7 @@ export default function AdminTransactionsPage() {
           </Card>
 
           {/* Card 3 */}
-          <Card className="rounded-3xl border-slate-200/80 shadow-xs bg-white p-5 space-y-2">
+          <Card className="rounded-2xl border-slate-200/80 shadow-xs bg-white p-5 space-y-2">
             <div className="flex items-center justify-between">
               <span className="text-xs font-bold text-slate-500 uppercase tracking-wider">
                 Đã giải ngân rút ví
@@ -355,7 +352,7 @@ export default function AdminTransactionsPage() {
           </Card>
 
           {/* Card 4 */}
-          <Card className="rounded-3xl border-slate-200/80 shadow-xs bg-white p-5 space-y-2">
+          <Card className="rounded-2xl border-slate-200/80 shadow-xs bg-white p-5 space-y-2">
             <div className="flex items-center justify-between">
               <span className="text-xs font-bold text-slate-500 uppercase tracking-wider">
                 Tổng biến động ví
@@ -374,7 +371,7 @@ export default function AdminTransactionsPage() {
         </div>
 
         {/* ─── TAB NAVIGATION & ADVANCED FILTERS ─── */}
-        <Card className="rounded-3xl border-slate-200/80 shadow-xs bg-white overflow-hidden space-y-4 p-5 sm:p-6">
+        <Card className="rounded-2xl border-slate-200/80 shadow-xs bg-white overflow-hidden space-y-4 p-5 sm:p-6">
           {/* Top Tabs */}
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b pb-4">
             <div className="flex items-center gap-2 bg-slate-100 p-1.5 rounded-2xl w-fit">
@@ -914,7 +911,7 @@ export default function AdminTransactionsPage() {
       {/* ─── REVIEW PAYOUT DIALOG ─── */}
       {selectedPayout && (
         <Dialog open={!!selectedPayout} onOpenChange={() => setSelectedPayout(null)}>
-          <DialogContent className="max-w-md rounded-3xl p-6 space-y-4">
+          <DialogContent className="max-w-md rounded-2xl p-6 space-y-4">
             <DialogHeader>
               <DialogTitle className="text-base font-bold flex items-center gap-2">
                 <Building2 className="h-5 w-5 text-emerald-600" />

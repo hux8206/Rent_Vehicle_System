@@ -1,8 +1,8 @@
 "use client";
 
 import React, { useState, useEffect, useRef } from "react";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { motion } from "framer-motion";
 import { VehicleModel, api } from "@/lib/api";
 import { useAuth } from "@/context/auth-context";
 import {
@@ -62,6 +62,7 @@ export function BookingModal({
   const [deliveryAddress, setDeliveryAddress] = useState<string>("");
   const [paymentType, setPaymentType] = useState<number>(1); // 1: Cọc 30%, 0: Toàn bộ
   const [hasAgreedLicense, setHasAgreedLicense] = useState<boolean>(false);
+  const [hasAgreedTerms, setHasAgreedTerms] = useState<boolean>(false);
 
   const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -211,6 +212,10 @@ export function BookingModal({
       toast.error("Vui lòng xác nhận bạn đã có Giấy phép lái xe chính chủ hợp lệ để tiếp tục!");
       return;
     }
+    if (!hasAgreedTerms) {
+      toast.error("Vui lòng đồng ý với Điều khoản dịch vụ và Chính sách bảo mật để tiếp tục!");
+      return;
+    }
     if (pickupType === 1 && !deliveryAddress.trim()) {
       toast.error("Vui lòng nhập địa chỉ giao xe tận nơi!");
       return;
@@ -250,7 +255,7 @@ export function BookingModal({
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="max-w-2xl w-[95vw] sm:w-full max-h-[92vh] flex flex-col p-0 overflow-hidden rounded-3xl border border-slate-200 shadow-2xl">
+      <DialogContent className="max-w-2xl w-[95vw] sm:w-full max-h-[92vh] flex flex-col p-0 overflow-hidden rounded-2xl border border-slate-200 shadow-2xl">
         {/* Header - Fixed at top */}
         <DialogHeader className="shrink-0 p-5 sm:p-6 pb-4 border-b bg-slate-50/80">
           <div className="flex items-center gap-2 mb-1">
@@ -281,8 +286,8 @@ export function BookingModal({
                       <Calendar className="h-3.5 w-3.5 text-blue-600" />
                       {format24hDateTime(startTime)} → {format24hDateTime(endTime)} ({isTimeValid ? `${dayRent} ngày` : "Thời gian không hợp lệ"})
                     </span>
-                    <span className="inline-flex items-center gap-1 text-[11px] font-semibold text-purple-700 bg-purple-50 px-2 py-0.5 rounded-md border border-purple-200">
-                      <Clock className="h-3 w-3 text-purple-600" />
+                    <span className="inline-flex items-center gap-1 text-[11px] font-semibold text-slate-700 bg-slate-100 px-2 py-0.5 rounded-md border border-slate-200">
+                      <Clock className="h-3 w-3 text-slate-600" />
                       Mở cửa: {storeOpenTime} - {storeCloseTime}
                     </span>
                   </div>
@@ -328,7 +333,7 @@ export function BookingModal({
                   <button
                     type="button"
                     onClick={() => setPickupType(0)}
-                    className={`p-3.5 rounded-2xl border text-left transition-all cursor-pointer ${
+                    className={`p-3.5 rounded-2xl border text-left transition-all cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:ring-offset-1 ${
                       pickupType === 0
                         ? "border-blue-600 bg-blue-50/50 text-blue-900 ring-2 ring-blue-600/30"
                         : "border-slate-200 hover:border-slate-300 text-slate-700 bg-white"
@@ -344,7 +349,7 @@ export function BookingModal({
                   <button
                     type="button"
                     onClick={() => setPickupType(1)}
-                    className={`p-3.5 rounded-2xl border text-left transition-all cursor-pointer ${
+                    className={`p-3.5 rounded-2xl border text-left transition-all cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:ring-offset-1 ${
                       pickupType === 1
                         ? "border-blue-600 bg-blue-50/50 text-blue-900 ring-2 ring-blue-600/30"
                         : "border-slate-200 hover:border-slate-300 text-slate-700 bg-white"
@@ -416,10 +421,52 @@ export function BookingModal({
                     type="checkbox"
                     checked={hasAgreedLicense}
                     onChange={(e) => setHasAgreedLicense(e.target.checked)}
-                    className="mt-0.5 h-4 w-4 rounded text-amber-600 focus:ring-amber-500 border-slate-300 cursor-pointer"
+                    className="mt-0.5 h-4 w-4 rounded text-amber-600 focus:ring-amber-500 border-slate-300 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-500 focus-visible:ring-offset-1"
                   />
                   <span className="text-xs leading-relaxed">
                     Tôi xác nhận đã có <strong>Giấy phép lái xe chính chủ hợp lệ</strong> và cam kết mang theo bản gốc khi nhận xe. Tôi hiểu rằng cửa hàng sẽ không giao xe nếu tôi không xuất trình được bằng lái.
+                  </span>
+                </label>
+
+                {/* Checkbox Tuân thủ Nghị định 13: Điều khoản & Bảo mật */}
+                <label
+                  onClick={(e) => {
+                    if ((e.target as HTMLElement).tagName !== "INPUT") {
+                      setHasAgreedTerms(!hasAgreedTerms);
+                    }
+                  }}
+                  className={`flex items-start gap-3 p-3 rounded-xl border cursor-pointer select-none transition-all ${
+                    hasAgreedTerms
+                      ? "bg-blue-50/90 border-blue-400 ring-2 ring-blue-400/30 text-blue-950 font-medium"
+                      : "bg-white border-slate-200 text-slate-700 hover:border-blue-300"
+                  }`}
+                >
+                  <input
+                    type="checkbox"
+                    checked={hasAgreedTerms}
+                    onChange={(e) => setHasAgreedTerms(e.target.checked)}
+                    className="mt-0.5 h-4 w-4 rounded text-blue-600 focus:ring-blue-500 border-slate-300 cursor-pointer shrink-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:ring-offset-1"
+                  />
+                  <span className="text-xs leading-relaxed">
+                    Tôi đồng ý với{" "}
+                    <Link
+                      href="/terms"
+                      target="_blank"
+                      className="font-bold text-blue-600 hover:underline"
+                      onClick={(e) => e.stopPropagation()}
+                    >
+                      Điều khoản dịch vụ
+                    </Link>{" "}
+                    (bao gồm trách nhiệm chịu phạt nguội) và{" "}
+                    <Link
+                      href="/privacy"
+                      target="_blank"
+                      className="font-bold text-blue-600 hover:underline"
+                      onClick={(e) => e.stopPropagation()}
+                    >
+                      Chính sách bảo mật
+                    </Link>{" "}
+                    của VehicleRent.
                   </span>
                 </label>
               </div>
@@ -462,26 +509,11 @@ export function BookingModal({
           ) : (
             /* Step 2: Payment with VietQR & 10-Minute Countdown */
             <div className="space-y-6">
-              {/* Live Countdown Banner with Orange Glow */}
-              <motion.div
-                animate={{
-                  scale: [1, 1.015, 1],
-                  boxShadow: [
-                    "0 0 0 rgba(249, 115, 22, 0)",
-                    "0 8px 20px -4px rgba(249, 115, 22, 0.35)",
-                    "0 0 0 rgba(249, 115, 22, 0)",
-                  ],
-                }}
-                transition={{
-                  duration: 1.8,
-                  repeat: Infinity,
-                  ease: "easeInOut",
-                }}
-                className="rounded-2xl bg-orange-50/80 border-2 border-orange-400/60 p-4 flex items-center justify-between"
-              >
+              {/* Live Countdown Banner - Solid, stable, high contrast */}
+              <div className="rounded-2xl bg-orange-50 border-2 border-orange-300 p-4 flex items-center justify-between shadow-xs">
                 <div className="flex items-center gap-3">
-                  <div className="h-10 w-10 rounded-full bg-orange-500/20 text-orange-700 flex items-center justify-center font-bold">
-                    <Clock className="h-5 w-5 animate-spin-slow" />
+                  <div className="h-10 w-10 rounded-xl bg-orange-500 text-white flex items-center justify-center font-bold shadow-xs">
+                    <Clock className="h-5 w-5" />
                   </div>
                   <div>
                     <h4 className="font-bold text-slate-900 text-sm">Thời gian giữ chỗ còn lại</h4>
@@ -493,7 +525,7 @@ export function BookingModal({
                 <div className="text-2xl font-black font-mono text-orange-600 tracking-wider">
                   {formatTimer(timeLeft)}
                 </div>
-              </motion.div>
+              </div>
 
               {/* Driver License Handover Notice */}
               <div className="rounded-2xl border-2 border-amber-300 bg-amber-50/90 p-4 flex items-start gap-3 text-amber-950 shadow-xs">
@@ -515,7 +547,7 @@ export function BookingModal({
                   {qrInfo?.qrCode ? (
                     <img
                       src={qrInfo.qrCode}
-                      alt="VietQR Code"
+                      alt={`Mã VietQR thanh toán tiền cọc thuê xe ${model?.name || ""}`}
                       className="w-56 h-56 object-contain"
                     />
                   ) : (
@@ -539,7 +571,7 @@ export function BookingModal({
                         className="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs h-9.5 rounded-xl gap-2 shadow-xs cursor-pointer"
                       >
                         <Smartphone className="h-4 w-4" />
-                        <span>Chuyển Khoản Ngay (Mở App)</span>
+                        <span>Mở ứng dụng ngân hàng thanh toán</span>
                       </Button>
                     )}
 
@@ -551,7 +583,7 @@ export function BookingModal({
                         className="w-full border-blue-200 text-blue-700 hover:bg-blue-50 font-bold text-xs h-9.5 rounded-xl gap-2 shadow-xs cursor-pointer"
                       >
                         <Download className="h-4 w-4" />
-                        <span>Tải Mã QR Về Máy</span>
+                        <span>Tải ảnh mã VietQR</span>
                       </Button>
                     )}
                   </div>
@@ -664,7 +696,7 @@ export function BookingModal({
               <Button
                 type="submit"
                 form="booking-form"
-                disabled={isSubmitting || !isTimeValid || !hasAgreedLicense}
+                disabled={isSubmitting || !isTimeValid || !hasAgreedLicense || !hasAgreedTerms}
                 className="h-10 px-5 bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs rounded-xl shadow-md gap-1.5 cursor-pointer disabled:bg-slate-300 disabled:text-slate-500"
               >
                 {isSubmitting ? (
@@ -675,7 +707,7 @@ export function BookingModal({
                 ) : !isTimeValid ? (
                   <span>Thời gian không hợp lệ</span>
                 ) : (
-                  <span>Xác nhận & Giữ xe 10 phút</span>
+                  <span>Xác nhận đặt xe & Giữ chỗ</span>
                 )}
               </Button>
             </>

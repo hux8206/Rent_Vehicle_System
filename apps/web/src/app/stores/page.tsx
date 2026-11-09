@@ -66,15 +66,11 @@ export default function StoresPage() {
         {/* Header */}
         <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 pb-2 border-b border-slate-200/80">
           <div>
-            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-blue-50 border border-blue-200/60 text-blue-700 text-xs font-bold uppercase tracking-wider mb-2">
-              <span className="w-2 h-2 rounded-full bg-blue-600 animate-pulse"></span>
-              Đối Tác Xe Xác Thực
-            </div>
             <h1 className="text-3xl font-black text-slate-900 tracking-tight">
               Hệ Thống Cửa Hàng & Nhà Xe Đối Tác
             </h1>
             <p className="text-xs sm:text-sm text-slate-500 mt-1.5 max-w-2xl leading-relaxed">
-              Khám phá danh sách các nhà xe uy tín trên toàn quốc (34 tỉnh thành) đã được VehicleRent kiểm định giấy phép, cơ sở vật chất và đánh giá thực tế từ khách hàng.
+              Mạng lưới đối tác cho thuê xe tự lái được kiểm định giấy phép, niêm yết chính sách cọc minh bạch và có đánh giá thực tế từ khách thuê.
             </p>
           </div>
 
@@ -131,7 +127,7 @@ export default function StoresPage() {
             <p className="text-xs font-semibold">Đang tải danh sách nhà xe đối tác...</p>
           </div>
         ) : filteredStores.length === 0 ? (
-          <div className="text-center py-16 bg-white rounded-3xl border border-dashed border-slate-300 p-8">
+          <div className="text-center py-16 bg-white rounded-2xl border border-dashed border-slate-300 p-8">
             <StoreIcon className="h-12 w-12 text-slate-300 mx-auto mb-2" />
             <h3 className="font-bold text-slate-800 text-sm">Không tìm thấy nhà xe phù hợp</h3>
             <p className="text-xs text-slate-500 mt-1 max-w-sm mx-auto">
@@ -162,7 +158,7 @@ export default function StoresPage() {
               return (
                 <div
                   key={store.id}
-                  className="bg-white rounded-3xl border border-slate-200/90 shadow-xs hover:shadow-xl hover:border-blue-200 transition-all duration-300 overflow-hidden flex flex-col justify-between group"
+                  className="bg-white rounded-2xl border border-slate-200/90 shadow-xs hover:shadow-xl hover:border-blue-200 transition-all duration-300 overflow-hidden flex flex-col justify-between group"
                 >
                   <div>
                     {/* Store Facade Image */}
@@ -172,18 +168,18 @@ export default function StoresPage() {
                           store.storeImage ||
                           "https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?w=800&q=80"
                         }
-                        alt={store.storeName}
+                        alt={`Cửa hàng cho thuê xe ${store.storeName} tại ${store.province || store.address || "Đà Nẵng"}`}
                         className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                       />
                       <div className="absolute top-3 left-3">
-                        <span className="bg-emerald-600/95 backdrop-blur-md text-white font-bold text-[10px] px-2.5 py-1 rounded-full shadow-xs flex items-center gap-1">
+                        <span className="bg-emerald-600 text-white font-bold text-[10px] px-2.5 py-1 rounded-full shadow-xs flex items-center gap-1">
                           <CheckCircle2 className="h-3 w-3" /> Đã kiểm định
                         </span>
                       </div>
 
                       {/* Store Star Rating Badge */}
                       <div className="absolute top-3 right-3">
-                        <span className="bg-white/95 backdrop-blur-md text-amber-800 font-bold text-[11px] px-2.5 py-1 rounded-full shadow-xs flex items-center gap-1 border border-amber-200">
+                        <span className="bg-white text-amber-800 font-bold text-[11px] px-2.5 py-1 rounded-full shadow-xs flex items-center gap-1 border border-amber-200">
                           <Star className="h-3.5 w-3.5 fill-amber-400 text-amber-500" />
                           <span>{rating}</span>
                           <span className="text-[10px] text-slate-500 font-normal">
@@ -194,7 +190,7 @@ export default function StoresPage() {
 
                       <div className="absolute bottom-3 left-3">
                         {store.province && (
-                          <span className="bg-slate-900/85 backdrop-blur-md text-white font-semibold text-[10px] px-2.5 py-1 rounded-full flex items-center gap-1">
+                          <span className="bg-slate-900 text-white font-semibold text-[10px] px-2.5 py-1 rounded-full flex items-center gap-1">
                             <MapPin className="h-3 w-3 text-blue-300" />
                             {store.province}
                           </span>
@@ -202,7 +198,7 @@ export default function StoresPage() {
                       </div>
 
                       <div className="absolute bottom-3 right-3">
-                        <span className="bg-slate-900/85 backdrop-blur-md text-white font-semibold text-[10px] px-2.5 py-1 rounded-full">
+                        <span className="bg-slate-900 text-white font-semibold text-[10px] px-2.5 py-1 rounded-full">
                           {vehicleCount} dòng xe
                         </span>
                       </div>
@@ -232,8 +228,8 @@ export default function StoresPage() {
                           <Phone className="h-3.5 w-3.5 text-slate-400" />
                           <span>{store.phoneContact}</span>
                         </div>
-                        <div className="flex items-center gap-1 text-purple-700 font-semibold bg-purple-50 px-2 py-0.5 rounded-lg text-[11px]">
-                          <Clock className="h-3 w-3 text-purple-600" />
+                        <div className="flex items-center gap-1 text-slate-700 font-semibold bg-slate-100 px-2 py-0.5 rounded-lg text-[11px]">
+                          <Clock className="h-3 w-3 text-slate-500" />
                           <span>{store.openTime || "07:00"} - {store.closeTime || "21:00"}</span>
                         </div>
                       </div>
@@ -247,7 +243,7 @@ export default function StoresPage() {
                         variant="outline"
                         className="w-full text-xs font-bold h-10 rounded-xl group-hover:bg-blue-600 group-hover:text-white group-hover:border-blue-600 transition-all gap-1.5 shadow-xs"
                       >
-                        <span>Xem Showroom & Đặt Xe</span>
+                        <span>Xem chi tiết cửa hàng & Đặt xe</span>
                         <ArrowRight className="h-3.5 w-3.5" />
                       </Button>
                     </Link>

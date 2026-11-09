@@ -87,9 +87,6 @@ export default function AdminReviewsPage() {
         {/* Header */}
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div>
-            <div className="text-xs font-bold uppercase tracking-wider text-red-600">
-              Kiểm Duyệt Nội Dung
-            </div>
             <h1 className="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight">
               Quản Trị Đánh Giá & Bình Luận
             </h1>
@@ -111,7 +108,7 @@ export default function AdminReviewsPage() {
             Đang tải danh sách đánh giá...
           </div>
         ) : reviews.length === 0 ? (
-          <Card className="text-center py-16 rounded-3xl border shadow-xs bg-white p-8">
+          <Card className="text-center py-16 rounded-2xl border shadow-xs bg-white p-8">
             <Star className="h-10 w-10 text-slate-300 mx-auto mb-2" />
             <h3 className="text-sm font-bold text-slate-800">Chưa có đánh giá nào trên sàn</h3>
           </Card>

@@ -24,6 +24,9 @@ build/
 # Testing
 coverage/
 *.lcov
+test-results/
+playwright-report/
+bin/
 
 # Environment & Secrets (Never commit secrets to GitHub)
 .env*

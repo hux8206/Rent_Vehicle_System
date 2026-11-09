@@ -27,7 +27,6 @@ import {
   CheckCircle2,
   AlertCircle,
   Clock,
-  Sparkles,
   ShieldCheck,
   CreditCard,
   Building2,
@@ -371,9 +370,6 @@ function PartnerWalletContent() {
                 </Badge>
               )}
             </div>
-            <div className="text-xs font-bold uppercase tracking-wider text-emerald-700">
-              {isBranchStaffMode ? "Sổ Cái & Biến Động Giao Dịch Chi Nhánh" : "Tài chính & Ví Doanh Thu Đối Tác"}
-            </div>
             <h1 className="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight">
               {isBranchStaffMode ? "Quan Sát Số Dư & Lịch Sử Giao Dịch" : "Quản Lý Ví & Lịch Sử Giao Dịch"}
             </h1>
@@ -398,7 +394,7 @@ function PartnerWalletContent() {
                 size="sm"
                 className="bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs rounded-xl gap-1.5 shadow-xs"
               >
-                <Building2 className="h-4 w-4" /> Rút Tiền Về Ngân Hàng
+                <Building2 className="h-4 w-4" /> Rút tiền về tài khoản ngân hàng
               </Button>
 
               <Button
@@ -410,7 +406,7 @@ function PartnerWalletContent() {
                 variant="outline"
                 className="border-slate-300 hover:bg-slate-100 font-bold text-xs rounded-xl gap-1.5 shadow-xs"
               >
-                <QrCode className="h-4 w-4 text-amber-600" /> Nạp tiền ví
+                <QrCode className="h-4 w-4 text-amber-600" /> Nạp ví VietQR
               </Button>
             </div>
           )}
@@ -468,7 +464,7 @@ function PartnerWalletContent() {
         </div>
 
         {/* Transaction History Table */}
-        <Card className="rounded-3xl border-slate-200 shadow-sm bg-white overflow-hidden">
+        <Card className="rounded-2xl border-slate-200 shadow-sm bg-white overflow-hidden">
           <CardHeader className="p-6 pb-4 border-b bg-slate-50/60 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
             <div>
               <CardTitle className="text-base font-bold text-slate-900">
@@ -697,7 +693,7 @@ function PartnerWalletContent() {
                   disabled={isGeneratingQr}
                   className="bg-amber-600 hover:bg-amber-700 text-white"
                 >
-                  {isGeneratingQr ? "Đang sinh QR..." : "Tạo Mã VietQR"}
+                  {isGeneratingQr ? "Đang sinh QR..." : "Tạo mã nạp ví VietQR"}
                 </Button>
               </DialogFooter>
             </form>
@@ -705,7 +701,7 @@ function PartnerWalletContent() {
             <div className="space-y-4 pt-2 text-center">
               <div className="w-56 h-56 mx-auto bg-slate-50 border rounded-2xl p-2 flex items-center justify-center">
                 {depositQrInfo.qrCode ? (
-                  <img src={depositQrInfo.qrCode} alt="QR Nap Vi" className="w-full h-full object-contain" />
+                  <img src={depositQrInfo.qrCode} alt="Mã QR PayOS nạp tiền vào ví đối tác" className="w-full h-full object-contain" />
                 ) : (
                   <QrCode className="h-20 w-20 text-slate-300 animate-pulse" />
                 )}
@@ -908,7 +904,7 @@ function PartnerWalletContent() {
 
       {/* Modal: Xác thực Mật khẩu Chủ Cửa Hàng khi rút tiền */}
       <Dialog open={isWithdrawPasswordModalOpen} onOpenChange={setIsWithdrawPasswordModalOpen}>
-        <DialogContent className="max-w-md w-[95vw] sm:w-full rounded-3xl p-6 bg-white space-y-4">
+        <DialogContent className="max-w-md w-[95vw] sm:w-full rounded-2xl p-6 bg-white space-y-4">
           <DialogHeader>
             <div className="h-12 w-12 rounded-2xl bg-amber-100 text-amber-700 flex items-center justify-center mb-1">
               <Lock className="h-6 w-6" />

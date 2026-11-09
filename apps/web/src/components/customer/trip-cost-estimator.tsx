@@ -4,10 +4,9 @@ import React, { useState, useMemo } from "react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
-  Sparkles,
   Navigation,
   Fuel,
-  Zap,
+  BatteryCharging,
   TrendingDown,
   ShieldCheck,
   Compass,
@@ -145,13 +144,13 @@ export function TripCostEstimator({ onSelectCategory }: TripCostEstimatorProps) 
   }, [distanceKm]);
 
   return (
-    <div className="rounded-3xl bg-white border border-slate-200/90 shadow-sm p-6 sm:p-8 text-slate-900">
+    <div className="rounded-2xl bg-white border border-slate-200/90 shadow-sm p-6 sm:p-8 text-slate-900">
       {/* Header */}
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6 pb-6 border-b border-slate-100">
         <div>
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50 border border-blue-200 text-blue-700 text-xs font-bold uppercase tracking-wider mb-2">
-            <Sparkles className="h-3.5 w-3.5 text-blue-600" />
-            Công Cụ Hỗ Trợ Chuyến Đi
+          <div className="flex items-center gap-2 text-xs font-semibold text-slate-500 mb-1.5">
+            <Fuel className="h-4 w-4 text-blue-600" />
+            <span>Ước tính tiêu hao nhiên liệu theo dữ liệu thực tế</span>
           </div>
           <h2 className="text-2xl sm:text-3xl font-black tracking-tight text-slate-900 flex flex-wrap items-center gap-3">
             <span>Dự Toán Chi Phí & Lộ Trình Thông Minh</span>
@@ -160,7 +159,7 @@ export function TripCostEstimator({ onSelectCategory }: TripCostEstimatorProps) 
             </span>
           </h2>
           <p className="text-slate-500 text-xs sm:text-sm mt-1">
-            Chọn cung đường phượt hoặc kéo cự ly để tính chính xác tiền xăng, so sánh mức tiêu hao và nhận gợi ý dòng xe an toàn nhất.
+            Chọn cung đường phượt hoặc kéo cự ly để tính toán tiền xăng dự kiến, so sánh mức tiêu hao và nhận gợi ý dòng xe an toàn, tối ưu.
           </p>
         </div>
 
@@ -185,9 +184,9 @@ export function TripCostEstimator({ onSelectCategory }: TripCostEstimatorProps) 
 
       {/* Preset Route Pills */}
       <div className="mb-6">
-        <label className="text-xs font-bold text-slate-600 uppercase tracking-wider mb-3 flex items-center gap-2">
+        <label className="text-xs font-bold text-slate-800 mb-3 flex items-center gap-2">
           <Compass className="h-4 w-4 text-blue-600" />
-          Các Cung Đường Phổ Biến Được Yêu Thích:
+          Cung đường khám phá gợi ý:
         </label>
         <div className="flex items-center gap-2.5 overflow-x-auto pb-2 scrollbar-none">
           {PRESET_ROUTES.map((route) => {
@@ -223,7 +222,7 @@ export function TripCostEstimator({ onSelectCategory }: TripCostEstimatorProps) 
         <div className="flex items-center justify-between mb-3">
           <div className="flex items-center gap-2">
             <Navigation className="h-4 w-4 text-blue-600" />
-            <span className="text-xs font-bold uppercase tracking-wider text-slate-700">
+            <span className="text-xs font-bold text-slate-800">
               Khoảng cách di chuyển một chiều:
             </span>
           </div>
@@ -339,7 +338,7 @@ export function TripCostEstimator({ onSelectCategory }: TripCostEstimatorProps) 
           </div>
           <div className="flex items-center justify-between mb-2">
             <span className="text-xs font-bold text-emerald-800 uppercase flex items-center gap-1">
-              <Zap className="h-3.5 w-3.5 text-emerald-600" />
+              <BatteryCharging className="h-3.5 w-3.5 text-emerald-600" />
               4. Xe Máy Điện
             </span>
           </div>

@@ -28,7 +28,6 @@ import {
   Info,
   Car,
   Bike,
-  Sparkles,
   HelpCircle,
   AlertCircle,
   FileCheck2,
@@ -94,7 +93,7 @@ export default function VehicleDetailPage() {
   if (!model) {
     return (
       <div className="container max-w-lg mx-auto py-24 px-4 text-center space-y-4">
-        <div className="h-16 w-16 bg-amber-50 text-amber-600 rounded-3xl flex items-center justify-center mx-auto border border-amber-200">
+        <div className="h-16 w-16 bg-amber-50 text-amber-600 rounded-2xl flex items-center justify-center mx-auto border border-amber-200">
           <AlertCircle className="h-8 w-8" />
         </div>
         <h2 className="text-2xl font-black text-slate-900">Dòng xe hiện không khả dụng</h2>
@@ -104,7 +103,7 @@ export default function VehicleDetailPage() {
         <div className="pt-2">
           <Link href="/">
             <Button className="rounded-xl font-bold bg-blue-600 hover:bg-blue-700 text-white text-xs gap-1.5 shadow-xs">
-              <ArrowLeft className="h-4 w-4" /> Về Trang Chủ Khám Phá Xe Khác
+              <ArrowLeft className="h-4 w-4" /> Về trang chủ tìm xe
             </Button>
           </Link>
         </div>
@@ -183,13 +182,13 @@ export default function VehicleDetailPage() {
           <div className="lg:col-span-2 space-y-6">
             {/* Gallery */}
             <div className="space-y-3">
-              <div className="h-80 sm:h-96 w-full rounded-3xl overflow-hidden border bg-white shadow-xs">
+              <div className="h-80 sm:h-96 w-full rounded-2xl overflow-hidden border bg-white shadow-xs">
                 <img
                   src={
                     selectedImg ||
                     "https://images.unsplash.com/photo-1558981403-c5f9899a28bc?auto=format&fit=crop&w=800&q=80"
                   }
-                  alt={model.name}
+                  alt={`Hình ảnh xe ${model.brand ? model.brand + " " : ""}${model.name || "cho thuê tự lái"} tại nhà xe ${model.store?.storeName || ""}`}
                   onError={(e) => {
                     (e.target as HTMLImageElement).src =
                       "https://images.unsplash.com/photo-1558981403-c5f9899a28bc?auto=format&fit=crop&w=800&q=80";
@@ -203,12 +202,14 @@ export default function VehicleDetailPage() {
                   {model.images.map((img, idx) => (
                     <button
                       key={idx}
+                      type="button"
+                      aria-label={`Xem ảnh ${idx + 1} của dòng xe ${model.name}`}
                       onClick={() => setSelectedImg(img)}
-                      className={`h-20 w-24 rounded-xl overflow-hidden border-2 transition-all ${
+                      className={`h-20 w-24 rounded-xl overflow-hidden border-2 transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-600 ${
                         selectedImg === img ? "border-blue-600 ring-2 ring-blue-600/30" : "border-slate-200 opacity-70 hover:opacity-100"
                       }`}
                     >
-                      <img src={img} alt="thumb" className="w-full h-full object-cover" />
+                      <img src={img} alt={`${model.name || "Dòng xe"} - Ảnh chi tiết ${idx + 1}`} className="w-full h-full object-cover" />
                     </button>
                   ))}
                 </div>
@@ -294,8 +295,8 @@ export default function VehicleDetailPage() {
                       <FileCheck2 className="h-5 w-5" />
                     </div>
                     <div>
-                      <div className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-emerald-50 border border-emerald-200 text-emerald-700 text-[10px] font-bold uppercase tracking-wider">
-                        <CheckCircle2 className="h-3 w-3" /> Chuẩn Kiểm Định 5 Sao
+                      <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-emerald-50 border border-emerald-200 text-emerald-700 text-[11px] font-bold">
+                        <CheckCircle2 className="h-3 w-3" /> Kiểm định 6 điểm kỹ thuật số
                       </div>
                       <h3 className="text-base font-black text-slate-900 mt-0.5">
                         Biên Bản Bàn Giao & Kiểm Tra 6 Điểm Kỹ Thuật Số
@@ -308,8 +309,8 @@ export default function VehicleDetailPage() {
                     onClick={() => setIsHandoverOpen(true)}
                     className="bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs rounded-xl h-9 px-4 gap-1.5 shadow-xs"
                   >
-                    <span>Xem Biên Bản Minh Bạch</span>
-                    <Sparkles className="h-3.5 w-3.5" />
+                    <span>Xem biên bản bàn giao xe</span>
+                    <FileCheck2 className="h-3.5 w-3.5" />
                   </Button>
                 </div>
 
@@ -366,8 +367,8 @@ export default function VehicleDetailPage() {
                   </div>
                   <div className="space-y-1">
                     <span className="text-slate-500 font-semibold">Giờ mở cửa đón khách:</span>
-                    <div className="font-bold text-purple-700 flex items-center gap-1.5 text-xs">
-                      <Clock className="h-4 w-4 text-purple-600" />
+                    <div className="font-bold text-slate-800 flex items-center gap-1.5 text-xs">
+                      <Clock className="h-4 w-4 text-cyan-600" />
                       <span>{storeOpenTime} - {storeCloseTime}</span>
                     </div>
                   </div>
@@ -476,9 +477,9 @@ export default function VehicleDetailPage() {
 
           {/* Right Col: Reservation Booking Sidebar */}
           <div className="space-y-6">
-            <Card className="rounded-3xl border-slate-200/80 shadow-lg sticky top-20 bg-white">
-              <CardHeader className="p-6 pb-4 border-b bg-gradient-to-br from-blue-50/50 to-indigo-50/30">
-                <span className="text-[11px] font-bold uppercase tracking-wider text-blue-600">
+            <Card className="rounded-2xl border-slate-200/80 shadow-lg sticky top-20 bg-white">
+              <CardHeader className="p-6 pb-4 border-b border-slate-100 bg-slate-50/70">
+                <span className="text-xs font-bold text-blue-700">
                   Tính tiền & Đặt chỗ tức thì
                 </span>
                 <div className="flex items-baseline justify-between mt-1">
@@ -491,12 +492,12 @@ export default function VehicleDetailPage() {
 
               <CardContent className="p-6 space-y-5">
                 {/* Store Operating Hours Pill */}
-                <div className="flex items-center justify-between p-2.5 rounded-xl bg-purple-50/80 border border-purple-200 text-purple-950 text-xs">
+                <div className="flex items-center justify-between p-2.5 rounded-xl bg-slate-50 border border-slate-200 text-slate-800 text-xs">
                   <span className="flex items-center gap-1.5 font-semibold">
-                    <Clock className="h-4 w-4 text-purple-600 shrink-0" />
+                    <Clock className="h-4 w-4 text-cyan-600 shrink-0" />
                     <span>Giờ mở cửa đón khách:</span>
                   </span>
-                  <span className="font-bold text-purple-700 bg-white px-2 py-0.5 rounded-md border border-purple-100">
+                  <span className="font-bold text-slate-900 bg-white px-2 py-0.5 rounded-md border border-slate-200 shadow-2xs">
                     {storeOpenTime} - {storeCloseTime}
                   </span>
                 </div>
@@ -593,7 +594,7 @@ export default function VehicleDetailPage() {
                     : !isHoursValid
                     ? "Ngoài giờ mở cửa của nhà xe"
                     : availableCount > 0
-                    ? "Tiến hành Đặt & Giữ chỗ"
+                    ? "Xác nhận đặt xe & Giữ chỗ"
                     : "Tạm hết xe trong khung giờ này"}
                 </Button>
               </CardContent>

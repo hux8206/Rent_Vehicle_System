@@ -27,7 +27,6 @@ import {
   RefreshCw,
   Trash2,
   Info,
-  Sparkles,
   ArrowLeft,
 } from "lucide-react";
 import { toast } from "sonner";
@@ -345,9 +344,6 @@ function PartnerOnboardingContent() {
               <ArrowLeft className="h-3.5 w-3.5" /> Quay Lại Quản Lý Chi Nhánh (Chủ Cửa Hàng)
             </Link>
           </div>
-          <div className="text-xs font-bold uppercase tracking-wider text-amber-700">
-            Khu Vực Chủ Cửa Hàng (Master Owner HQ) • Quản Lý Hồ Sơ
-          </div>
           <h1 className="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight">
             Quản Lý Hồ Sơ Chi Nhánh: {store?.storeName || ""}
           </h1>
@@ -407,7 +403,7 @@ function PartnerOnboardingContent() {
         )}
 
         {/* Form Container */}
-        <Card className="rounded-3xl border-slate-200 shadow-sm bg-white overflow-hidden">
+        <Card className="rounded-2xl border-slate-200 shadow-sm bg-white overflow-hidden">
           <CardHeader className="p-6 border-b bg-slate-50/60">
             <CardTitle className="text-base font-bold flex items-center gap-2">
               <Building2 className="h-5 w-5 text-amber-700" />
@@ -486,7 +482,7 @@ function PartnerOnboardingContent() {
                       </div>
                     ) : storeImage ? (
                       <div className="relative h-44 w-full sm:w-96 rounded-2xl overflow-hidden border bg-slate-100 group shadow-xs">
-                        <img src={storeImage} alt="Store facade" className="w-full h-full object-cover" />
+                        <img src={storeImage} alt={storeName ? `Ảnh chụp mặt tiền cửa hàng ${storeName}` : "Ảnh chụp mặt tiền cửa hàng đối tác"} className="w-full h-full object-cover" />
                         <div className="absolute inset-0 bg-slate-950/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-2">
                           <button
                             type="button"

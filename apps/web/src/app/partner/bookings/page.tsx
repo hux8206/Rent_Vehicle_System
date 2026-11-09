@@ -206,9 +206,6 @@ function PartnerBookingsContent() {
         {/* Header */}
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div>
-            <div className="text-xs font-bold uppercase tracking-wider text-amber-700">
-              Đối tác nhà xe • Phân hệ vận hành chi nhánh
-            </div>
             <h1 className="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight">
               Quản Lý Đơn Thuê & Bàn Giao Xe
             </h1>
@@ -347,7 +344,7 @@ function PartnerBookingsContent() {
             <p className="text-xs font-semibold">Đang tải danh sách đơn thuê...</p>
           </div>
         ) : filteredBookings.length === 0 ? (
-          <Card className="text-center py-16 rounded-3xl border shadow-xs bg-white p-8">
+          <Card className="text-center py-16 rounded-2xl border shadow-xs bg-white p-8">
             <Bike className="h-10 w-10 text-slate-300 mx-auto mb-2" />
             <h3 className="text-sm font-bold text-slate-800">Không tìm thấy đơn thuê nào phù hợp</h3>
             <p className="text-xs text-slate-500 mt-1">Hãy thử xóa bộ lọc hoặc chọn mục trạng thái khác.</p>

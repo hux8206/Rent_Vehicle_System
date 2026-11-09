@@ -25,6 +25,7 @@ function RegisterForm() {
   const [phone, setPhone] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [agreedToTerms, setAgreedToTerms] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
   // Per-field validation errors
@@ -33,6 +34,7 @@ function RegisterForm() {
     phone?: string;
     email?: string;
     password?: string;
+    agreedToTerms?: string;
     general?: string;
   }>({});
 
@@ -45,6 +47,7 @@ function RegisterForm() {
     else if (!/\S+@\S+\.\S+/.test(email.trim())) errors.email = "Định dạng email không hợp lệ.";
     if (!password) errors.password = "Vui lòng nhập mật khẩu.";
     else if (password.length < 6) errors.password = "Mật khẩu phải từ 6 ký tự trở lên.";
+    if (!agreedToTerms) errors.agreedToTerms = "Bạn cần đồng ý với Điều khoản dịch vụ và Chính sách bảo mật để tiếp tục.";
     return errors;
   };
 
@@ -98,7 +101,7 @@ function RegisterForm() {
         <ArrowLeft className="h-4 w-4" /> Quay lại trang chủ
       </Link>
 
-      <Card className="rounded-3xl border-slate-200/90 shadow-xl overflow-hidden bg-white">
+      <Card className="rounded-2xl border-slate-200/90 shadow-xl overflow-hidden bg-white">
         <CardContent className="p-8 sm:p-10 space-y-6">
           {/* Header */}
           <div className="space-y-2">
@@ -234,6 +237,39 @@ function RegisterForm() {
               )}
             </div>
 
+            {/* Checkbox Tuân thủ Nghị định 13 */}
+            <div className="space-y-1.5 pt-1">
+              <label className="flex items-start gap-2.5 cursor-pointer text-xs text-slate-600 select-none">
+                <input
+                  type="checkbox"
+                  checked={agreedToTerms}
+                  onChange={(e) => {
+                    setAgreedToTerms(e.target.checked);
+                    if (fieldErrors.agreedToTerms) {
+                      setFieldErrors((p) => ({ ...p, agreedToTerms: undefined }));
+                    }
+                  }}
+                  className="mt-0.5 h-4 w-4 rounded border-slate-300 text-blue-600 focus:ring-blue-500 cursor-pointer shrink-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:ring-offset-1"
+                />
+                <span className="leading-snug">
+                  Tôi đồng ý với{" "}
+                  <Link href="/terms" target="_blank" className="font-semibold text-blue-600 hover:underline">
+                    Điều khoản dịch vụ
+                  </Link>{" "}
+                  và{" "}
+                  <Link href="/privacy" target="_blank" className="font-semibold text-blue-600 hover:underline">
+                    Chính sách bảo mật
+                  </Link>{" "}
+                  của VehicleRent.
+                </span>
+              </label>
+              {fieldErrors.agreedToTerms && (
+                <p className="text-[11px] font-semibold text-red-600 pl-6 leading-tight">
+                  {fieldErrors.agreedToTerms}
+                </p>
+              )}
+            </div>
+
             <Button
               type="submit"
               disabled={isLoading}
@@ -244,10 +280,10 @@ function RegisterForm() {
               }`}
             >
               {isLoading
-                ? "Đang xử lý..."
+                ? "Đang xử lý tạo tài khoản..."
                 : activeTab === "partner"
-                ? "Đăng Ký Đối Tác Nhà Xe"
-                : "Đăng Ký Khách Thuê"}
+                ? "Đăng ký đối tác nhà xe"
+                : "Đăng ký tài khoản khách thuê"}
               <ArrowRight className="h-4 w-4" />
             </Button>
           </form>

@@ -5,6 +5,57 @@ import { v2 as cloudinary } from "cloudinary";
 import { S3Client, PutObjectCommand } from "@aws-sdk/client-s3";
 
 // 1. Kiểm tra cấu hình Cloudinary
+const MAX_FILE_SIZE = 5 * 1024 * 1024; // 5MB
+
+function detectImageTypeFromMagicBytes(buffer: Buffer): string | null {
+  if (buffer.length < 12) return null;
+
+  // JPEG: FF D8 FF
+  if (buffer[0] === 0xff && buffer[1] === 0xd8 && buffer[2] === 0xff) {
+    return "jpg";
+  }
+
+  // PNG: 89 50 4E 47 0D 0A 1A 0A
+  if (
+    buffer[0] === 0x89 &&
+    buffer[1] === 0x50 &&
+    buffer[2] === 0x4e &&
+    buffer[3] === 0x47 &&
+    buffer[4] === 0x0d &&
+    buffer[5] === 0x0a &&
+    buffer[6] === 0x1a &&
+    buffer[7] === 0x0a
+  ) {
+    return "png";
+  }
+
+  // GIF: 47 49 46 38
+  if (
+    buffer[0] === 0x47 &&
+    buffer[1] === 0x49 &&
+    buffer[2] === 0x46 &&
+    buffer[3] === 0x38
+  ) {
+    return "gif";
+  }
+
+  // WEBP: RIFF....WEBP (52 49 46 46 .... 57 45 42 50)
+  if (
+    buffer[0] === 0x52 &&
+    buffer[1] === 0x49 &&
+    buffer[2] === 0x46 &&
+    buffer[3] === 0x46 &&
+    buffer[8] === 0x57 &&
+    buffer[9] === 0x45 &&
+    buffer[10] === 0x42 &&
+    buffer[11] === 0x50
+  ) {
+    return "webp";
+  }
+
+  return null;
+}
+
 function isCloudinaryConfigured() {
   return Boolean(
     process.env.CLOUDINARY_CLOUD_NAME &&
@@ -90,14 +141,25 @@ export async function POST(req: NextRequest) {
       );
     }
 
+    if (file.size > MAX_FILE_SIZE) {
+      return NextResponse.json(
+        { error: "Kích thước ảnh vượt quá giới hạn cho phép (tối đa 5MB)" },
+        { status: 400 }
+      );
+    }
+
     const bytes = await file.arrayBuffer();
     const buffer = Buffer.from(bytes);
 
-    const rawExt = file.name ? file.name.split(".").pop() || "jpg" : "jpg";
-    const ext = ["jpg", "jpeg", "png", "webp", "heic"].includes(rawExt.toLowerCase())
-      ? rawExt.toLowerCase()
-      : "jpg";
-    const filename = `img-${Date.now()}-${Math.random().toString(36).substring(2, 8)}.${ext}`;
+    const detectedExt = detectImageTypeFromMagicBytes(buffer);
+    if (!detectedExt) {
+      return NextResponse.json(
+        { error: "Định dạng file không hợp lệ. Chỉ chấp nhận các định dạng ảnh hợp lệ (JPEG, PNG, WEBP, GIF)" },
+        { status: 400 }
+      );
+    }
+
+    const filename = `img-${Date.now()}-${Math.random().toString(36).substring(2, 8)}.${detectedExt}`;
 
     // --- Ưu tiên 1: Đẩy lên Cloudinary nếu có cấu hình ---
     if (isCloudinaryConfigured()) {
@@ -131,7 +193,7 @@ export async function POST(req: NextRequest) {
           Bucket: bucketName,
           Key: key,
           Body: buffer,
-          ContentType: file.type || mimeTypes[ext] || "image/jpeg",
+          ContentType: file.type || mimeTypes[detectedExt] || "image/jpeg",
         })
       );
 

@@ -721,7 +721,7 @@ function PartnerVehiclesContent() {
                           <div className="h-12 w-12 rounded-xl bg-slate-100 overflow-hidden shrink-0 border">
                             <img
                               src={m.images?.[0] || "https://images.unsplash.com/photo-1558981403-c5f9899a28bc?w=300&q=80"}
-                              alt={m.name}
+                              alt={m.name ? `Ảnh đại diện dòng xe ${m.brand ? m.brand + " " : ""}${m.name}` : "Ảnh đại diện dòng xe"}
                               className="h-full w-full object-cover"
                             />
                           </div>
@@ -772,7 +772,7 @@ function PartnerVehiclesContent() {
           {/* Col 2 & 3: Physical Vehicle Items (License Plates) of Selected Model */}
           <div className="lg:col-span-2 space-y-4">
             {selectedModel ? (
-              <Card className="rounded-3xl border-slate-200 shadow-sm bg-white overflow-hidden">
+              <Card className="rounded-2xl border-slate-200 shadow-sm bg-white overflow-hidden">
                 <CardHeader className="p-6 pb-4 border-b bg-slate-50/60 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
                   <div>
                     <div className="flex items-center gap-2 mb-1">
@@ -908,7 +908,7 @@ function PartnerVehiclesContent() {
                 </CardContent>
               </Card>
             ) : (
-              <Card className="rounded-3xl border-slate-200 p-12 text-center text-xs text-slate-500">
+              <Card className="rounded-2xl border-slate-200 p-12 text-center text-xs text-slate-500">
                 Vui lòng chọn hoặc thêm một dòng xe để quản lý kho biển số.
               </Card>
             )}
@@ -991,7 +991,7 @@ function PartnerVehiclesContent() {
                 </div>
               ) : modelImage ? (
                 <div className="relative h-32 w-full rounded-xl overflow-hidden border bg-slate-100 group shadow-xs">
-                  <img src={modelImage} alt="Vehicle model" className="w-full h-full object-cover" />
+                  <img src={modelImage} alt={modelName ? `Ảnh chụp mẫu xe ${modelName}` : "Ảnh chụp mẫu xe đối tác"} className="w-full h-full object-cover" />
                   <div className="absolute inset-0 bg-slate-950/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-2">
                     <button
                       type="button"
@@ -1119,7 +1119,7 @@ function PartnerVehiclesContent() {
                 </div>
               ) : editModelImage ? (
                 <div className="relative h-32 w-full rounded-xl overflow-hidden border bg-slate-100 group shadow-xs">
-                  <img src={editModelImage} alt="Vehicle model" className="w-full h-full object-cover" />
+                  <img src={editModelImage} alt={editModelName ? `Ảnh chụp cập nhật mẫu xe ${editModelName}` : "Ảnh chụp mẫu xe đối tác"} className="w-full h-full object-cover" />
                   <div className="absolute inset-0 bg-slate-950/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-2">
                     <button
                       type="button"
@@ -1293,7 +1293,7 @@ function PartnerVehiclesContent() {
 
       {/* ── Bulk Import Preview Modal ─────────────────────────────────────────── */}
       <Dialog open={isImportModalOpen} onOpenChange={setIsImportModalOpen}>
-        <DialogContent className="max-w-2xl rounded-3xl p-6 sm:p-8 space-y-5">
+        <DialogContent className="max-w-2xl rounded-2xl p-6 sm:p-8 space-y-5">
           <DialogHeader>
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
               <div className="flex items-center gap-2.5">

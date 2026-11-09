@@ -14,7 +14,7 @@ services:
       MYSQL_ALLOW_EMPTY_PASSWORD: 'yes'
       MYSQL_DATABASE: Rent_vehicle_system
     ports:
-      - '3306:3306'
+      - '127.0.0.1:3306:3306'
     volumes:
       - mysql_data:/var/lib/mysql
     healthcheck:
@@ -41,9 +41,9 @@ services:
       DATABASE_URL: mysql://root:@mysql:3306/Rent_vehicle_system
       JWT_SECRET: ${JWT_SECRET:-vehiclerent_super_secret_key_2026}
       JWT_EXPIRES_IN: ${JWT_EXPIRES_IN:-7d}
-      PAYOS_CLIENT_ID: ${PAYOS_CLIENT_ID:-87c67de5-87b9-4338-a1e4-a30afa4f1cec}
-      PAYOS_API_KEY: ${PAYOS_API_KEY:-9d8081ab-4a05-4195-88fd-b695e3af9e05}
-      PAYOS_CHECKSUM_KEY: ${PAYOS_CHECKSUM_KEY:-d2b80f7f6ba09693b120f58390531d85bf78e0bf57c94d862a7158bec109b7fa}
+      PAYOS_CLIENT_ID: ${PAYOS_CLIENT_ID:-}
+      PAYOS_API_KEY: ${PAYOS_API_KEY:-}
+      PAYOS_CHECKSUM_KEY: ${PAYOS_CHECKSUM_KEY:-}
     depends_on:
       mysql:
         condition: service_healthy
@@ -65,9 +65,9 @@ services:
       NODE_ENV: production
       PORT: 3000
       NEXT_PUBLIC_API_URL: ${NEXT_PUBLIC_API_URL:-http://localhost:4000/api}
-      CLOUDINARY_CLOUD_NAME: ${CLOUDINARY_CLOUD_NAME:-dpfaidsiw}
-      CLOUDINARY_API_KEY: ${CLOUDINARY_API_KEY:-719494448499853}
-      CLOUDINARY_API_SECRET: ${CLOUDINARY_API_SECRET:-tUnsWIrBiHeXbiD2xuczbOAwIHM}
+      CLOUDINARY_CLOUD_NAME: ${CLOUDINARY_CLOUD_NAME:-}
+      CLOUDINARY_API_KEY: ${CLOUDINARY_API_KEY:-}
+      CLOUDINARY_API_SECRET: ${CLOUDINARY_API_SECRET:-}
     volumes:
       - uploads_data:/app/public/uploads
     depends_on:

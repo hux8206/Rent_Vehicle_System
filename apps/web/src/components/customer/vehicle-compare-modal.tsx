@@ -88,7 +88,7 @@ export function VehicleCompareModal({
 
   return (
     <Dialog open={isOpen} onOpenChange={(open) => !open && onClose()}>
-      <DialogContent className="max-w-4xl rounded-3xl p-6 sm:p-8 max-h-[92vh] overflow-y-auto bg-white border border-slate-200">
+      <DialogContent className="max-w-4xl rounded-2xl p-6 sm:p-8 max-h-[92vh] overflow-y-auto bg-white border border-slate-200">
         <DialogHeader className="pb-3 border-b border-slate-100 space-y-1">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
@@ -111,7 +111,7 @@ export function VehicleCompareModal({
             )}
           </div>
           <DialogDescription className="text-xs text-slate-500">
-            Đối chiếu chi tiết giá thuê, mức cọc, mức tiêu hao nhiên liệu và địa hình tối ưu để chọn chiếc xe ưng ý nhất.
+            Đối chiếu chi tiết giá thuê, mức cọc, mức tiêu hao nhiên liệu và địa hình tối ưu để chọn chiếc xe phù hợp nhu cầu.
           </DialogDescription>
         </DialogHeader>
 
@@ -154,7 +154,7 @@ export function VehicleCompareModal({
                       <div className="h-36 w-full rounded-xl overflow-hidden bg-slate-100 border border-slate-100 relative">
                         <img
                           src={coverImg}
-                          alt={v.name}
+                          alt={`Ảnh so sánh xe ${v.brand ? v.brand + " " : ""}${v.name || ""}`}
                           className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                         />
                         <div className="absolute top-2 left-2">
@@ -231,7 +231,7 @@ export function VehicleCompareModal({
                         </div>
 
                         <div className="pt-1">
-                          <span className="text-[11px] font-bold text-slate-500 block mb-0.5 uppercase tracking-wider">
+                          <span className="text-xs font-bold text-slate-700 block mb-1">
                             Điểm nổi trội:
                           </span>
                           <p className="text-[11px] text-emerald-800 bg-emerald-50 p-2 rounded-lg border border-emerald-200 leading-relaxed font-medium">
@@ -301,7 +301,7 @@ export function FloatingCompareBar({
                       ? v.images[0]
                       : "https://images.unsplash.com/photo-1558981403-c5f9899a28bc?w=100&q=80"
                   }
-                  alt={v.name}
+                  alt={`Thu nhỏ dòng xe ${v.name || ""}`}
                   className="h-5 w-5 rounded-full object-cover"
                 />
                 <span className="font-semibold max-w-[90px] sm:max-w-[120px] truncate text-[11px] text-slate-800">
@@ -309,8 +309,9 @@ export function FloatingCompareBar({
                 </span>
                 <button
                   type="button"
+                  aria-label={`Bỏ so sánh dòng xe ${v.name}`}
                   onClick={() => onRemoveVehicle(v.id)}
-                  className="text-slate-400 hover:text-red-500 rounded-full p-0.5 transition-colors"
+                  className="text-slate-400 hover:text-red-500 rounded-full p-0.5 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-500"
                 >
                   <X className="h-3 w-3" />
                 </button>

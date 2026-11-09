@@ -7,6 +7,7 @@
     "apps/*"
   ],
   "scripts": {
+    "dev": "concurrently -n \"API,WEB\" -c \"blue,green\" \"npm run dev:api\" \"npm run dev:web\"",
     "dev:api": "npm run start:dev --workspace=api",
     "dev:web": "npm run dev --workspace=web",
     "build": "npm run build --workspaces",
@@ -14,10 +15,15 @@
     "db:migrate": "npm run prisma:migrate --workspace=api",
     "db:push": "npm run prisma:push --workspace=api",
     "db:seed": "npm run prisma:seed --workspace=api",
-    "db:studio": "npm run prisma:studio --workspace=api"
+    "db:studio": "npm run prisma:studio --workspace=api",
+    "test:e2e": "playwright test",
+    "test:load": "node scripts/reset-test-vehicle.js && ./bin/k6 run booking-stress-test.js"
   },
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "@playwright/test": "^1.65.0",
+    "concurrently": "^10.0.7"
+  }
 }
-

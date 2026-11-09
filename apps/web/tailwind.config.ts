@@ -62,6 +62,10 @@ const config: Config = {
         "orange-glow": "0 8px 20px -4px rgba(249, 115, 22, 0.35)",
         "card-hover": "0 12px 30px -10px rgba(15, 23, 42, 0.12), 0 4px 12px rgba(6, 182, 212, 0.08)",
       },
+      fontFamily: {
+        sans: ["var(--font-sans)", "system-ui", "-apple-system", "BlinkMacSystemFont", "Segoe UI", "Roboto", "sans-serif"],
+        heading: ["var(--font-heading)", "var(--font-sans)", "system-ui", "sans-serif"],
+      },
     },
   },
   plugins: [],

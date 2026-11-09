@@ -1,5 +1,6 @@
 import {
   BadRequestException,
+  ForbiddenException,
   Injectable,
   Logger,
   NotFoundException,
@@ -77,7 +78,7 @@ export class PaymentsService {
     });
     if (!payment) throw new NotFoundException('Không tìm thấy thông tin thanh toán');
     if (payment.booking.customerId !== customerId)
-      throw new BadRequestException('Bạn không có quyền xem thanh toán này');
+      throw new ForbiddenException('Bạn không có quyền xem thông tin thanh toán này');
     if (payment.paymentStatus === 1)
       throw new BadRequestException('Đơn này đã được thanh toán');
 
@@ -149,8 +150,8 @@ export class PaymentsService {
     try {
       webhookData = await this.payos.verifyWebhook(body);
     } catch {
-      this.logger.warn('[Webhook] Chữ ký không hợp lệ — bỏ qua');
-      return { success: false };
+      this.logger.warn('[Webhook] Chữ ký không hợp lệ — từ chối');
+      throw new BadRequestException('Chữ ký webhook không hợp lệ');
     }
 
     const { orderCode, code } = webhookData;

@@ -1038,7 +1038,7 @@ function PartnerDashboardContent() {
               {/* Option 1: Master Owner HQ */}
               <div
                 onClick={handleEnterOwnerPortal}
-                className="group relative bg-white rounded-3xl p-7 border-2 border-slate-200 hover:border-amber-500 shadow-sm hover:shadow-xl transition-all duration-300 cursor-pointer flex flex-col justify-between"
+                className="group relative bg-white rounded-2xl p-7 border-2 border-slate-200 hover:border-amber-500 shadow-sm hover:shadow-xl transition-all duration-300 cursor-pointer flex flex-col justify-between"
               >
                 <div className="absolute top-5 right-5">
                   <span className="flex items-center gap-1 text-[11px] font-bold px-2.5 py-1 rounded-full bg-amber-50 text-amber-800 border border-amber-200">
@@ -1096,7 +1096,7 @@ function PartnerDashboardContent() {
                   }
                   handleEnterBranchPortal();
                 }}
-                className="group relative bg-white rounded-3xl p-7 border-2 border-slate-200 hover:border-blue-500 shadow-sm hover:shadow-xl transition-all duration-300 cursor-pointer flex flex-col justify-between"
+                className="group relative bg-white rounded-2xl p-7 border-2 border-slate-200 hover:border-blue-500 shadow-sm hover:shadow-xl transition-all duration-300 cursor-pointer flex flex-col justify-between"
               >
                 <div className="absolute top-5 right-5">
                   <span className="flex items-center gap-1 text-[11px] font-bold px-2.5 py-1 rounded-full bg-blue-50 text-blue-700 border border-blue-200">
@@ -1162,7 +1162,7 @@ function PartnerDashboardContent() {
         {currentMode === "owner" && (
           <div className="space-y-8">
             {/* Top Bar with Lock & Settings */}
-            <div className="bg-gradient-to-r from-amber-700 via-amber-800 to-amber-900 text-white rounded-3xl p-6 sm:p-7 shadow-lg flex flex-col md:flex-row md:items-center justify-between gap-5">
+            <div className="bg-gradient-to-r from-amber-700 via-amber-800 to-amber-900 text-white rounded-2xl p-6 sm:p-7 shadow-lg flex flex-col md:flex-row md:items-center justify-between gap-5">
               <div className="space-y-1">
                 <div className="flex items-center gap-2">
                   <Badge className="bg-amber-400 text-amber-950 font-black text-[10px] uppercase tracking-wider">
@@ -1217,7 +1217,7 @@ function PartnerDashboardContent() {
             </div>
 
             {/* Wallet & Financial Management Section */}
-            <Card className="rounded-3xl border-2 border-amber-200/80 bg-gradient-to-br from-amber-50/40 via-white to-white shadow-sm overflow-hidden p-6 sm:p-7 space-y-6">
+            <Card className="rounded-2xl border-2 border-amber-200/80 bg-gradient-to-br from-amber-50/40 via-white to-white shadow-sm overflow-hidden p-6 sm:p-7 space-y-6">
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-amber-100">
                 <div className="space-y-1">
                   <div className="flex items-center gap-2">
@@ -1297,7 +1297,7 @@ function PartnerDashboardContent() {
 
             {/* Consolidated Revenue Analytics Cards */}
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-              <Card className="rounded-3xl border-slate-200 shadow-xs bg-white p-5 space-y-2">
+              <Card className="rounded-2xl border-slate-200 shadow-xs bg-white p-5 space-y-2">
                 <div className="flex items-center justify-between">
                   <span className="text-xs font-bold text-slate-500">Tổng doanh thu ròng</span>
                   <div className="h-8 w-8 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center">
@@ -1312,7 +1312,7 @@ function PartnerDashboardContent() {
                 </div>
               </Card>
 
-              <Card className="rounded-3xl border-slate-200 shadow-xs bg-white p-5 space-y-2">
+              <Card className="rounded-2xl border-slate-200 shadow-xs bg-white p-5 space-y-2">
                 <div className="flex items-center justify-between">
                   <span className="text-xs font-bold text-slate-500">Tổng chuyến hoàn thành</span>
                   <div className="h-8 w-8 rounded-xl bg-indigo-50 text-indigo-600 flex items-center justify-center">
@@ -1325,7 +1325,7 @@ function PartnerDashboardContent() {
                 <div className="text-[11px] text-slate-500 font-semibold">Toàn bộ {stores.length} chi nhánh</div>
               </Card>
 
-              <Card className="rounded-3xl border-slate-200 shadow-xs bg-white p-5 space-y-2">
+              <Card className="rounded-2xl border-slate-200 shadow-xs bg-white p-5 space-y-2">
                 <div className="flex items-center justify-between">
                   <span className="text-xs font-bold text-slate-500">Xe đang lăn bánh</span>
                   <div className="h-8 w-8 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center">
@@ -1338,7 +1338,7 @@ function PartnerDashboardContent() {
                 <div className="text-[11px] text-blue-600 font-semibold">Tỷ lệ lấp đầy: {occupancyRate}%</div>
               </Card>
 
-              <Card className="rounded-3xl border-slate-200 shadow-xs bg-white p-5 space-y-2">
+              <Card className="rounded-2xl border-slate-200 shadow-xs bg-white p-5 space-y-2">
                 <div className="flex items-center justify-between">
                   <span className="text-xs font-bold text-slate-500">Tổng số chi nhánh</span>
                   <div className="h-8 w-8 rounded-xl bg-purple-50 text-purple-600 flex items-center justify-center">
@@ -1356,7 +1356,7 @@ function PartnerDashboardContent() {
 
             {/* Visual Charts */}
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-              <Card className="lg:col-span-2 rounded-3xl border-slate-200 shadow-xs bg-white p-6 space-y-4">
+              <Card className="lg:col-span-2 rounded-2xl border-slate-200 shadow-xs bg-white p-6 space-y-4">
                 <div className="flex items-center justify-between pb-2 border-b">
                   <div>
                     <CardTitle className="text-base font-extrabold text-slate-900 flex items-center gap-2">
@@ -1400,7 +1400,7 @@ function PartnerDashboardContent() {
               </Card>
 
               {/* Fleet Status PieChart */}
-              <Card className="rounded-3xl border-slate-200 shadow-xs bg-white p-6 space-y-4">
+              <Card className="rounded-2xl border-slate-200 shadow-xs bg-white p-6 space-y-4">
                 <div className="pb-2 border-b">
                   <CardTitle className="text-base font-extrabold text-slate-900 flex items-center gap-2">
                     <PieChartIcon className="h-5 w-5 text-blue-600" />
@@ -1459,7 +1459,7 @@ function PartnerDashboardContent() {
             </div>
 
             {/* Branch Management Table */}
-            <Card className="rounded-3xl border-slate-200 shadow-xs bg-white p-6 space-y-5">
+            <Card className="rounded-2xl border-slate-200 shadow-xs bg-white p-6 space-y-5">
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-3 border-b">
                 <div>
                   <CardTitle className="text-base font-extrabold text-slate-900 flex items-center gap-2">
@@ -1496,7 +1496,7 @@ function PartnerDashboardContent() {
                         <div className="h-12 w-12 rounded-xl overflow-hidden border bg-slate-100 shrink-0">
                           <img
                             src={s.storeImage || "https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?w=400&q=80"}
-                            alt={s.storeName}
+                            alt={`Cửa hàng ${s.storeName} - ${s.address || ""}`}
                             className="w-full h-full object-cover"
                           />
                         </div>
@@ -1646,7 +1646,7 @@ function PartnerDashboardContent() {
                 </div>
 
                 {stores.length === 0 ? (
-                  <Card className="rounded-3xl border-2 border-amber-200 bg-amber-50/50 p-8 text-center space-y-4">
+                  <Card className="rounded-2xl border-2 border-amber-200 bg-amber-50/50 p-8 text-center space-y-4">
                     <StoreIcon className="h-12 w-12 text-amber-500 mx-auto" />
                     <h3 className="text-lg font-bold text-amber-950">Chưa có chi nhánh nào</h3>
                     <p className="text-xs text-amber-800 max-w-md mx-auto">
@@ -1678,7 +1678,7 @@ function PartnerDashboardContent() {
                               toast.error(`Chi nhánh bị từ chối: ${s.rejectReason || "Vui lòng cập nhật hồ sơ"}`);
                             }
                           }}
-                          className={`group bg-white rounded-3xl border-2 transition-all p-5 flex flex-col justify-between space-y-4 shadow-xs ${
+                          className={`group bg-white rounded-2xl border-2 transition-all p-5 flex flex-col justify-between space-y-4 shadow-xs ${
                             isOperable
                               ? "border-slate-200 hover:border-blue-500 hover:shadow-xl cursor-pointer"
                               : "border-slate-200/80 bg-slate-50/60 opacity-90 cursor-not-allowed"
@@ -1688,7 +1688,7 @@ function PartnerDashboardContent() {
                             <div className="relative h-44 w-full rounded-2xl overflow-hidden bg-slate-100 border">
                               <img
                                 src={s.storeImage || "https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?w=600&q=80"}
-                                alt={s.storeName}
+                                alt={`Mặt tiền cửa hàng ${s.storeName} - ${s.address || ""}`}
                                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                               />
                               <div className="absolute top-3 right-3">
@@ -1929,7 +1929,7 @@ function PartnerDashboardContent() {
 
                   return (
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-                      <Card className="rounded-3xl border-slate-200 shadow-xs bg-white p-5 space-y-2">
+                      <Card className="rounded-2xl border-slate-200 shadow-xs bg-white p-5 space-y-2">
                         <span className="text-xs font-bold text-slate-500">Dòng xe kinh doanh</span>
                         <div className="text-2xl font-black text-slate-900">
                           {bModels.length} <span className="text-xs text-slate-500">dòng xe</span>
@@ -1937,7 +1937,7 @@ function PartnerDashboardContent() {
                         <span className="text-[11px] text-blue-600 font-semibold">Đăng ký tại cơ sở này</span>
                       </Card>
 
-                      <Card className="rounded-3xl border-slate-200 shadow-xs bg-white p-5 space-y-2">
+                      <Card className="rounded-2xl border-slate-200 shadow-xs bg-white p-5 space-y-2">
                         <span className="text-xs font-bold text-slate-500">Xe sẵn sàng giao khách</span>
                         <div className="text-2xl font-black text-emerald-600">
                           {bAvailable} <span className="text-xs text-slate-500">xe rảnh</span>
@@ -1945,7 +1945,7 @@ function PartnerDashboardContent() {
                         <span className="text-[11px] text-slate-400">Sẵn sàng nhận khách mới</span>
                       </Card>
 
-                      <Card className="rounded-3xl border-slate-200 shadow-xs bg-white p-5 space-y-2">
+                      <Card className="rounded-2xl border-slate-200 shadow-xs bg-white p-5 space-y-2">
                         <span className="text-xs font-bold text-slate-500">Đơn chờ bàn giao xe</span>
                         <div className="text-2xl font-black text-amber-600">
                           {bWaitPickup} <span className="text-xs text-slate-500">đơn</span>
@@ -1953,7 +1953,7 @@ function PartnerDashboardContent() {
                         <span className="text-[11px] text-amber-700 font-semibold">Cần gán biển số thực tế</span>
                       </Card>
 
-                      <Card className="rounded-3xl border-slate-200 shadow-xs bg-white p-5 space-y-2">
+                      <Card className="rounded-2xl border-slate-200 shadow-xs bg-white p-5 space-y-2">
                         <span className="text-xs font-bold text-slate-500">Khách đang thuê xe</span>
                         <div className="text-2xl font-black text-blue-600">
                           {bActiveRentals} <span className="text-xs text-slate-500">chuyến</span>
@@ -1966,7 +1966,7 @@ function PartnerDashboardContent() {
 
                 {/* Operations Navigation Cards */}
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
-                  <Card className="rounded-3xl border-2 border-slate-200 hover:border-amber-500 bg-white p-6 shadow-xs hover:shadow-md transition-all space-y-4">
+                  <Card className="rounded-2xl border-2 border-slate-200 hover:border-amber-500 bg-white p-6 shadow-xs hover:shadow-md transition-all space-y-4">
                     <div className="flex items-center gap-3.5">
                       <div className="h-12 w-12 rounded-2xl bg-amber-50 text-amber-700 flex items-center justify-center font-bold">
                         <Bike className="h-6 w-6" />
@@ -1989,7 +1989,7 @@ function PartnerDashboardContent() {
                     </div>
                   </Card>
 
-                  <Card className="rounded-3xl border-2 border-slate-200 hover:border-blue-500 bg-white p-6 shadow-xs hover:shadow-md transition-all space-y-4">
+                  <Card className="rounded-2xl border-2 border-slate-200 hover:border-blue-500 bg-white p-6 shadow-xs hover:shadow-md transition-all space-y-4">
                     <div className="flex items-center gap-3.5">
                       <div className="h-12 w-12 rounded-2xl bg-blue-50 text-blue-700 flex items-center justify-center font-bold">
                         <ClipboardList className="h-6 w-6" />
@@ -2012,7 +2012,7 @@ function PartnerDashboardContent() {
                     </div>
                   </Card>
 
-                  <Card className="rounded-3xl border-2 border-slate-200 hover:border-emerald-500 bg-white p-6 shadow-xs hover:shadow-md transition-all space-y-4">
+                  <Card className="rounded-2xl border-2 border-slate-200 hover:border-emerald-500 bg-white p-6 shadow-xs hover:shadow-md transition-all space-y-4">
                     <div className="flex items-center gap-3.5">
                       <div className="h-12 w-12 rounded-2xl bg-emerald-50 text-emerald-700 flex items-center justify-center font-bold">
                         <Wallet className="h-6 w-6" />
@@ -2037,7 +2037,7 @@ function PartnerDashboardContent() {
                 </div>
 
                 {/* ── Financial & Wallet Balance for Branch Staff (Chỉ quan sát - KHÔNG nạp/rút tiền) ── */}
-                <Card className="rounded-3xl border-2 border-emerald-200 bg-linear-to-r from-emerald-50/70 via-teal-50/30 to-white p-6 shadow-xs space-y-4">
+                <Card className="rounded-2xl border-2 border-emerald-200 bg-linear-to-r from-emerald-50/70 via-teal-50/30 to-white p-6 shadow-xs space-y-4">
                   <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
                     <div className="flex items-start gap-4">
                       <div className="h-12 w-12 rounded-2xl bg-emerald-600 text-white flex items-center justify-center shrink-0 shadow-md shadow-emerald-600/20">
@@ -2110,7 +2110,7 @@ function PartnerDashboardContent() {
 
                   {/* Branch Financial Stat Tiles */}
                   <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-                    <Card className="rounded-3xl border-slate-200 shadow-xs bg-white p-5 space-y-1.5">
+                    <Card className="rounded-2xl border-slate-200 shadow-xs bg-white p-5 space-y-1.5">
                       <div className="flex items-center justify-between text-xs font-bold text-slate-500">
                         <span>Tổng thu khách (Gross)</span>
                         <TrendingUp className="h-4 w-4 text-amber-500" />
@@ -2122,7 +2122,7 @@ function PartnerDashboardContent() {
                       <span className="text-[11px] text-slate-400 block">Doanh thu từ các đơn hoàn tất</span>
                     </Card>
 
-                    <Card className="rounded-3xl border-slate-200 shadow-xs bg-white p-5 space-y-1.5">
+                    <Card className="rounded-2xl border-slate-200 shadow-xs bg-white p-5 space-y-1.5">
                       <div className="flex items-center justify-between text-xs font-bold text-slate-500">
                         <span>Thực nhận cơ sở (Net)</span>
                         <DollarSign className="h-4 w-4 text-emerald-500" />
@@ -2134,7 +2134,7 @@ function PartnerDashboardContent() {
                       <span className="text-[11px] text-emerald-700 font-semibold block">Sau khi trừ phí sàn</span>
                     </Card>
 
-                    <Card className="rounded-3xl border-slate-200 shadow-xs bg-white p-5 space-y-1.5">
+                    <Card className="rounded-2xl border-slate-200 shadow-xs bg-white p-5 space-y-1.5">
                       <div className="flex items-center justify-between text-xs font-bold text-slate-500">
                         <span>Tỷ lệ lấp đầy xe</span>
                         <Activity className="h-4 w-4 text-blue-500" />
@@ -2147,7 +2147,7 @@ function PartnerDashboardContent() {
                       </span>
                     </Card>
 
-                    <Card className="rounded-3xl border-slate-200 shadow-xs bg-white p-5 space-y-1.5">
+                    <Card className="rounded-2xl border-slate-200 shadow-xs bg-white p-5 space-y-1.5">
                       <div className="flex items-center justify-between text-xs font-bold text-slate-500">
                         <span>Tổng đơn hoàn tất</span>
                         <CheckCircle2 className="h-4 w-4 text-purple-500" />
@@ -2161,7 +2161,7 @@ function PartnerDashboardContent() {
 
                   {/* Charts Row: Revenue AreaChart & Fleet Status PieChart */}
                   <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-                    <Card className="lg:col-span-2 rounded-3xl border-slate-200 shadow-xs bg-white p-6 space-y-4">
+                    <Card className="lg:col-span-2 rounded-2xl border-slate-200 shadow-xs bg-white p-6 space-y-4">
                       <div className="flex items-center justify-between pb-2 border-b">
                         <div>
                           <CardTitle className="text-base font-extrabold text-slate-900 flex items-center gap-2">
@@ -2205,7 +2205,7 @@ function PartnerDashboardContent() {
                     </Card>
 
                     {/* Fleet Status PieChart */}
-                    <Card className="rounded-3xl border-slate-200 shadow-xs bg-white p-6 space-y-4">
+                    <Card className="rounded-2xl border-slate-200 shadow-xs bg-white p-6 space-y-4">
                       <div className="pb-2 border-b">
                         <CardTitle className="text-base font-extrabold text-slate-900 flex items-center gap-2">
                           <PieChartIcon className="h-5 w-5 text-blue-600" />
@@ -2265,7 +2265,7 @@ function PartnerDashboardContent() {
 
                   {/* Second Row: Booking status breakdown & Top Performing Vehicle Models */}
                   <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                    <Card className="rounded-3xl border-slate-200 shadow-xs bg-white p-6 space-y-4">
+                    <Card className="rounded-2xl border-slate-200 shadow-xs bg-white p-6 space-y-4">
                       <div className="pb-2 border-b">
                         <CardTitle className="text-base font-extrabold text-slate-900 flex items-center gap-2">
                           <BarChart3 className="h-5 w-5 text-indigo-600" />
@@ -2293,7 +2293,7 @@ function PartnerDashboardContent() {
                       </div>
                     </Card>
 
-                    <Card className="rounded-3xl border-slate-200 shadow-xs bg-white p-6 space-y-4">
+                    <Card className="rounded-2xl border-slate-200 shadow-xs bg-white p-6 space-y-4">
                       <div className="pb-2 border-b">
                         <CardTitle className="text-base font-extrabold text-slate-900 flex items-center gap-2">
                           <Bike className="h-5 w-5 text-amber-600" />
@@ -2341,7 +2341,7 @@ function PartnerDashboardContent() {
                 </div>
 
                 {/* ── Branch Transaction Ledger for Staff (Requirement 2) ── */}
-                <Card className="rounded-3xl border-slate-200 shadow-xs bg-white p-6 sm:p-7 space-y-6">
+                <Card className="rounded-2xl border-slate-200 shadow-xs bg-white p-6 sm:p-7 space-y-6">
                   <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b">
                     <div>
                       <h3 className="text-base font-extrabold text-slate-900 flex items-center gap-2">
@@ -2519,7 +2519,7 @@ function PartnerDashboardContent() {
       {/* MODAL 1: NHẬP MẬT KHẨU MỞ KHÓA CHỦ CỬA HÀNG (UNLOCK)                 */}
       {/* ===================================================================== */}
       <Dialog open={isUnlockModalOpen} onOpenChange={setIsUnlockModalOpen}>
-        <DialogContent className="max-w-md rounded-3xl p-6 sm:p-7">
+        <DialogContent className="max-w-md rounded-2xl p-6 sm:p-7">
           <DialogHeader className="text-center space-y-2">
             <div className="h-12 w-12 rounded-2xl bg-amber-100 text-amber-700 flex items-center justify-center mx-auto">
               <Lock className="h-6 w-6" />
@@ -2573,7 +2573,7 @@ function PartnerDashboardContent() {
       {/* MODAL 2: THIẾT LẬP HOẶC ĐỔI MẬT KHẨU CHỦ CỬA HÀNG                     */}
       {/* ===================================================================== */}
       <Dialog open={isPasswordModalOpen} onOpenChange={setIsPasswordModalOpen}>
-        <DialogContent className="max-w-md rounded-3xl p-6 sm:p-7">
+        <DialogContent className="max-w-md rounded-2xl p-6 sm:p-7">
           <DialogHeader className="text-center space-y-2">
             <div className="h-12 w-12 rounded-2xl bg-indigo-100 text-indigo-700 flex items-center justify-center mx-auto">
               <KeyRound className="h-6 w-6" />
@@ -2656,7 +2656,7 @@ function PartnerDashboardContent() {
       {/* MODAL 3: THÊM CHI NHÁNH MỚI (GỬI ADMIN DUYỆT)                         */}
       {/* ===================================================================== */}
       <Dialog open={isAddBranchModalOpen} onOpenChange={setIsAddBranchModalOpen}>
-        <DialogContent className="max-w-lg rounded-3xl p-6 sm:p-7 max-h-[90vh] overflow-y-auto">
+        <DialogContent className="max-w-lg rounded-2xl p-6 sm:p-7 max-h-[90vh] overflow-y-auto">
           <DialogHeader>
             <div className="flex items-center gap-2">
               <Building2 className="h-5 w-5 text-amber-600" />
@@ -2817,7 +2817,7 @@ function PartnerDashboardContent() {
               </div>
               {newBranchImage && (
                 <div className="h-24 w-40 rounded-xl overflow-hidden border mt-2">
-                  <img src={newBranchImage} alt="Preview" className="w-full h-full object-cover" />
+                  <img src={newBranchImage} alt="Xem trước ảnh mặt tiền chi nhánh mới" className="w-full h-full object-cover" />
                 </div>
               )}
             </div>
@@ -2859,7 +2859,7 @@ function PartnerDashboardContent() {
       {/* MODAL 4: YÊU CẦU THAY ĐỔI THÔNG TIN CHI NHÁNH (REQUIREMENT 3)         */}
       {/* ===================================================================== */}
       <Dialog open={isUpdateRequestModalOpen} onOpenChange={setIsUpdateRequestModalOpen}>
-        <DialogContent className="max-w-lg rounded-3xl p-6 sm:p-7 max-h-[90vh] overflow-y-auto">
+        <DialogContent className="max-w-lg rounded-2xl p-6 sm:p-7 max-h-[90vh] overflow-y-auto">
           <DialogHeader>
             <div className="flex items-center gap-2">
               <FileEdit className="h-5 w-5 text-purple-600" />
@@ -3013,7 +3013,7 @@ function PartnerDashboardContent() {
               </div>
               {updateImage && (
                 <div className="h-24 w-40 rounded-xl overflow-hidden border mt-2">
-                  <img src={updateImage} alt="Preview" className="w-full h-full object-cover" />
+                  <img src={updateImage} alt="Xem trước ảnh cập nhật mặt tiền chi nhánh" className="w-full h-full object-cover" />
                 </div>
               )}
             </div>
@@ -3064,7 +3064,7 @@ function PartnerDashboardContent() {
       {/* MODAL 5: NẠP VÍ VIETQR PAYOS (OWNER HQ)                              */}
       {/* ===================================================================== */}
       <Dialog open={isDepositModalOpen} onOpenChange={setIsDepositModalOpen}>
-        <DialogContent className="max-w-md rounded-3xl p-6 sm:p-7">
+        <DialogContent className="max-w-md rounded-2xl p-6 sm:p-7">
           <DialogHeader className="text-center space-y-2">
             <div className="h-12 w-12 rounded-2xl bg-amber-100 text-amber-700 flex items-center justify-center mx-auto">
               <QrCode className="h-6 w-6" />
@@ -3131,7 +3131,7 @@ function PartnerDashboardContent() {
               <div className="bg-slate-50 p-4 rounded-2xl border flex flex-col items-center">
                 <img
                   src={depositQrInfo.qrCode}
-                  alt="VietQR"
+                  alt="Mã QR PayOS nạp tiền vào ví đối tác"
                   className="w-52 h-52 object-contain rounded-xl shadow-xs"
                 />
                 <p className="text-xs font-bold text-slate-800 mt-2">
@@ -3163,7 +3163,7 @@ function PartnerDashboardContent() {
       {/* MODAL 6: RÚT TIỀN VỀ NGÂN HÀNG (OWNER HQ)                            */}
       {/* ===================================================================== */}
       <Dialog open={isWithdrawModalOpen} onOpenChange={setIsWithdrawModalOpen}>
-        <DialogContent className="max-w-md rounded-3xl p-6 sm:p-7">
+        <DialogContent className="max-w-md rounded-2xl p-6 sm:p-7">
           <DialogHeader className="text-center space-y-2">
             <div className="h-12 w-12 rounded-2xl bg-emerald-100 text-emerald-700 flex items-center justify-center mx-auto">
               <DollarSign className="h-6 w-6" />
@@ -3241,7 +3241,7 @@ function PartnerDashboardContent() {
       {/* MODAL: UPDATE STORE STATUS (OWNER HQ & BRANCH OPS)                  */}
       {/* =================================================================== */}
       <Dialog open={isUpdateStatusModalOpen} onOpenChange={setIsUpdateStatusModalOpen}>
-        <DialogContent className="max-w-md rounded-3xl p-6 bg-white space-y-4">
+        <DialogContent className="max-w-md rounded-2xl p-6 bg-white space-y-4">
           <DialogHeader>
             <DialogTitle className="text-lg font-black text-slate-900 flex items-center gap-2">
               <Activity className="h-5 w-5 text-blue-600" />
@@ -3371,7 +3371,7 @@ function PartnerDashboardContent() {
       {/* MODAL: CUSTOMIZE OPERATING HOURS (BRANCH OPS)                       */}
       {/* =================================================================== */}
       <Dialog open={isOperatingHoursModalOpen} onOpenChange={setIsOperatingHoursModalOpen}>
-        <DialogContent className="max-w-md w-[95vw] sm:w-full rounded-3xl p-6 bg-white space-y-4">
+        <DialogContent className="max-w-md w-[95vw] sm:w-full rounded-2xl p-6 bg-white space-y-4">
           <DialogHeader>
             <DialogTitle className="text-lg font-black text-slate-900 flex items-center gap-2">
               <Clock className="h-5 w-5 text-purple-600" />
